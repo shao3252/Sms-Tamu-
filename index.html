@@ -201,6 +201,7 @@
                         <h2><i class="fas fa-shield-alt"></i> <span data-i18n="adminPanel">Admin Panel</span></h2>
                     </div>
                     <div class="admin-grid">
+                        <!-- Auto Approve -->
                         <div class="admin-card">
                             <h3 data-i18n="autoApprove">Auto Approve Posts</h3>
                             <label class="switch">
@@ -208,29 +209,76 @@
                                 <span class="slider"></span>
                             </label>
                         </div>
+
+                        <!-- Chat Control -->
+                        <div class="admin-card">
+                            <h3><i class="fas fa-comments"></i> <span data-i18n="adminChatControl">Chat Control</span></h3>
+                            <p id="admin-chat-status-label" style="font-size:13px;margin-bottom:12px;color:var(--success);">Chat is Open</p>
+                            <button id="admin-chat-toggle-btn" class="btn-primary btn-sm" style="width:100%;">
+                                <i class="fas fa-power-off"></i> <span data-i18n="adminCloseChat">Close Chat</span>
+                            </button>
+                        </div>
+
+                        <!-- Payment Settings -->
+                        <div class="admin-card">
+                            <h3><i class="fas fa-credit-card"></i> <span data-i18n="adminPaymentSettings">Payment Settings</span></h3>
+                            <div class="form-group">
+                                <label data-i18n="accountName">Account Name</label>
+                                <input type="text" id="admin-payment-name" placeholder="Admin Name">
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="paymentNumber">Payment Number</label>
+                                <input type="text" id="admin-payment-number" placeholder="07XX XXX XXX">
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="paymentNetwork">Payment Network</label>
+                                <select id="admin-payment-network">
+                                    <option value="vodacom">Vodacom</option>
+                                    <option value="tigo">Tigo</option>
+                                    <option value="airtel">Airtel</option>
+                                    <option value="halopesa">HaloPesa</option>
+                                </select>
+                            </div>
+                            <button id="admin-save-payment-btn" class="btn-primary btn-sm" style="width:100%;" data-i18n="savePayment">Save Payment Details</button>
+                        </div>
+
+                        <!-- Pending Queue -->
                         <div class="admin-card" id="admin-pending-card">
                             <h3 data-i18n="pendingQueue">Pending Queue</h3>
                             <div id="admin-pending-list" class="admin-list"></div>
                         </div>
+
+                        <!-- Manage Users -->
                         <div class="admin-card">
                             <h3 data-i18n="manageUsers">Manage Users</h3>
                             <div id="admin-users-list" class="admin-list"></div>
                         </div>
+
+                        <!-- Announcements -->
                         <div class="admin-card">
                             <h3 data-i18n="announcements">Announcements</h3>
                             <div class="form-group">
                                 <textarea id="admin-announcement" rows="3" placeholder="Type announcement..."></textarea>
                             </div>
-                            <button id="admin-announce-btn" class="btn-primary btn-sm" data-i18n="send">Send</button>
-                            <!-- FIX: Admin can delete all announcements to clear the banner -->
-                            <button onclick="adminDeleteAnnouncements()" class="btn-outline btn-sm" style="margin-top:8px;width:100%;color:var(--danger);border-color:var(--danger);">
+                            <button id="admin-announce-btn" class="btn-primary btn-sm" style="width:100%;margin-bottom:8px;" data-i18n="send">Send</button>
+                            <button onclick="adminDeleteAnnouncements()" class="btn-outline btn-sm" style="width:100%;color:var(--danger);border-color:var(--danger);">
                                 <i class="fas fa-trash"></i> Delete All Announcements
                             </button>
                         </div>
+
+                        <!-- Payment Approvals -->
+                        <div class="admin-card">
+                            <h3><i class="fas fa-money-bill-wave"></i> <span data-i18n="adminPayments">Payment Approvals</span></h3>
+                            <div id="admin-payments-list" class="admin-list"></div>
+                        </div>
+
+                        <!-- VIP Requests -->
                         <div class="admin-card">
                             <h3 data-i18n="vipRequests">VIP Requests</h3>
                             <div id="admin-vip-list" class="admin-list"></div>
                         </div>
+
+                        <!-- Bug Reports -->
                         <div class="admin-card">
                             <h3 data-i18n="bugReports">Bug Reports</h3>
                             <div id="admin-bug-list" class="admin-list"></div>
@@ -343,15 +391,28 @@
             <div class="vip-content">
                 <div class="vip-price">Tsh 1,000</div>
                 <p data-i18n="vipDesc">Unlock exclusive premium messages and features.</p>
+
+                <!-- Admin Payment Details Display -->
+                <div style="background:var(--bg-tertiary);padding:16px;border-radius:12px;margin-bottom:20px;border:1px solid var(--gold);">
+                    <h4 style="color:var(--gold);margin-bottom:12px;font-size:14px;"><i class="fas fa-info-circle"></i> <span data-i18n="paymentDetails">Payment Details</span></h4>
+                    <div style="display:flex;flex-direction:column;gap:8px;font-size:14px;">
+                        <div><strong data-i18n="accountName">Name:</strong> <span id="vip-admin-name">Admin</span></div>
+                        <div><strong data-i18n="paymentNumber">Number:</strong> <span id="vip-admin-number">0712345678</span></div>
+                        <div><strong data-i18n="paymentNetwork">Network:</strong> <span id="vip-admin-network">VODACOM</span></div>
+                    </div>
+                </div>
+
                 <div class="form-group">
-                    <label data-i18n="network">Network</label>
+                    <label data-i18n="network">Your Network</label>
                     <select id="vip-network">
                         <option value="vodacom">Vodacom</option>
                         <option value="tigo">Tigo</option>
+                        <option value="airtel">Airtel</option>
+                        <option value="halopesa">HaloPesa</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label data-i18n="phoneNumber">Phone Number</label>
+                    <label data-i18n="phoneNumber">Your Phone Number</label>
                     <input type="tel" id="vip-phone" placeholder="07XX XXX XXX">
                 </div>
                 <button id="vip-pay-btn" class="btn-primary btn-gold" data-i18n="payNow">Pay Now</button>
