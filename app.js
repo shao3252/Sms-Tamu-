@@ -1,113 +1,48 @@
 /* ===== SMS TAMU - Main Application ===== */
-/* Supabase Configuration - Replace with your own credentials */
 const SUPABASE_URL = 'https://lvfvdzmabmokivpmkxuq.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_0aiiuU-He1wJJVdgNwdKYg_HeTfu1wh';
 
-/* ===== LANGUAGE DICTIONARY (i18n) ===== */
 const i18n = {
     en: {
         landingDesc: 'Share sweet, romantic, and engaging text messages with the world.',
-        getStarted: 'Get Started',
-        login: 'Login',
-        signUp: 'Sign Up',
-        noAccount: "Don't have an account?",
-        hasAccount: 'Already have an account?',
-        back: 'Back',
-        home: 'Home',
-        search: 'Search',
-        chat: 'Chat',
-        profile: 'Profile',
-        all: 'All',
-        catApology: 'Apology',
-        catPraise: 'Praise',
-        catFlirt: 'Flirt',
-        catOther: 'Other',
-        newPost: 'New Post',
-        category: 'Category',
-        message: 'Message',
-        vipPost: 'VIP Message (Premium)',
-        post: 'Post',
-        globalChat: 'Global Chat',
-        typeMessage: 'Type a message...',
-        following: 'Following',
-        followers: 'Followers',
-        editProfile: 'Edit Profile',
-        myPosts: 'My Posts',
-        liked: 'Liked',
-        saved: 'Saved',
-        save: 'Save',
-        username: 'Username',
-        bio: 'Bio',
-        adminPanel: 'Admin Panel',
-        autoApprove: 'Auto Approve Posts',
-        pendingQueue: 'Pending Queue',
-        manageUsers: 'Manage Users',
-        announcements: 'Announcements',
-        send: 'Send',
-        vipRequests: 'VIP Requests',
-        bugReports: 'Bug Reports',
-        reportBug: 'Report a Bug',
-        description: 'Description',
-        submit: 'Submit',
-        editPost: 'Edit Post',
-        unlockPremium: 'Unlock Premium',
-        vipDesc: 'Unlock exclusive premium messages and features.',
-        network: 'Network',
-        phoneNumber: 'Phone Number',
-        payNow: 'Pay Now',
-        searchPlaceholder: 'Search messages...',
-        copied: 'Copied to clipboard!',
-        posted: 'Posted successfully!',
-        deleted: 'Deleted successfully!',
-        updated: 'Updated successfully!',
-        error: 'An error occurred',
-        loading: 'Loading...',
-        emptyPosts: 'No posts yet',
-        emptyLiked: 'No liked posts',
-        emptySaved: 'No saved posts',
-        emptyChat: 'No messages yet',
-        emptySearch: 'No results found',
-        verifyUser: 'Verify',
-        blockUser: 'Block',
-        addFollowers: 'Add Followers',
-        approve: 'Approve',
-        reject: 'Reject',
-        logout: 'Logged out',
+        getStarted: 'Get Started', login: 'Login', signUp: 'Sign Up',
+        noAccount: "Don't have an account?", hasAccount: 'Already have an account?',
+        back: 'Back', home: 'Home', search: 'Search', chat: 'Chat', profile: 'Profile',
+        all: 'All', catApology: 'Apology', catPraise: 'Praise', catFlirt: 'Flirt', catOther: 'Other',
+        newPost: 'New Post', category: 'Category', message: 'Message', vipPost: 'VIP Message (Premium)',
+        post: 'Post', globalChat: 'Global Chat', typeMessage: 'Type a message...',
+        following: 'Following', followers: 'Followers', editProfile: 'Edit Profile',
+        myPosts: 'My Posts', liked: 'Liked', saved: 'Saved', save: 'Save',
+        username: 'Username', bio: 'Bio', adminPanel: 'Admin Panel',
+        autoApprove: 'Auto Approve Posts', pendingQueue: 'Pending Queue',
+        manageUsers: 'Manage Users', announcements: 'Announcements', send: 'Send',
+        vipRequests: 'VIP Requests', bugReports: 'Bug Reports', reportBug: 'Report a Bug',
+        description: 'Description', submit: 'Submit', editPost: 'Edit Post',
+        unlockPremium: 'Unlock Premium', vipDesc: 'Unlock exclusive premium messages and features.',
+        network: 'Network', phoneNumber: 'Phone Number', payNow: 'Pay Now',
+        searchPlaceholder: 'Search messages...', copied: 'Copied to clipboard!',
+        posted: 'Posted successfully!', deleted: 'Deleted successfully!',
+        updated: 'Updated successfully!', error: 'An error occurred', loading: 'Loading...',
+        emptyPosts: 'No posts yet', emptyLiked: 'No liked posts', emptySaved: 'No saved posts',
+        emptyChat: 'No messages yet', emptySearch: 'No results found',
+        verifyUser: 'Verify', blockUser: 'Block', addFollowers: 'Add Followers',
+        approve: 'Approve', reject: 'Reject', logout: 'Logged out',
         sessionExpired: 'Session expired, please login again',
-        confirmDelete: 'Are you sure you want to delete this?',
-        online: 'Online',
-        settings: 'Settings',
-        appearance: 'Appearance',
-        darkMode: 'Dark Mode',
-        language: 'Language',
-        support: 'Support',
-        account: 'Account',
-        logOut: 'Log Out',
-        themeChanged: 'Theme updated',
-        pleaseLogin: 'Please login first',
-        postCreated: 'Post created!',
-        chatSent: 'Message sent!',
-        profileUpdated: 'Profile updated!',
-        avatarUpdated: 'Avatar updated!',
-        announcementSent: 'Announcement sent!',
-        bugReported: 'Bug reported! Thank you.',
-        userVerified: 'User verified',
-        userBlocked: 'User blocked',
-        followersAdded: 'Followers added',
-        postApproved: 'Post approved',
-        postRejected: 'Post rejected',
-        paymentProcessing: 'Payment processing... (Demo)',
-        fillAllFields: 'Please fill in all fields',
-        imageTooLarge: 'Image too large (max 2MB)',
-        uploadFailed: 'Upload failed',
-        welcomeBack: 'Welcome back!',
-        checkEmail: 'Account created! Please check your email.',
-        authFailed: 'Authentication failed',
-        dbConnectionFailed: 'Database connection failed',
-        noPending: 'No pending posts',
-        noUsers: 'No users found',
-        noBugs: 'No bug reports',
-        noVipRequests: 'No VIP requests',
+        confirmDelete: 'Are you sure you want to delete this?', online: 'Online',
+        settings: 'Settings', appearance: 'Appearance', darkMode: 'Dark Mode',
+        language: 'Language', support: 'Support', account: 'Account', logOut: 'Log Out',
+        themeChanged: 'Theme updated', pleaseLogin: 'Please login first',
+        postCreated: 'Post created!', chatSent: 'Message sent!',
+        profileUpdated: 'Profile updated!', avatarUpdated: 'Avatar updated!',
+        announcementSent: 'Announcement sent!', bugReported: 'Bug reported! Thank you.',
+        userVerified: 'User verified', userBlocked: 'User blocked',
+        followersAdded: 'Followers added', postApproved: 'Post approved',
+        postRejected: 'Post rejected', paymentProcessing: 'Payment processing... (Demo)',
+        fillAllFields: 'Please fill in all fields', imageTooLarge: 'Image too large (max 2MB)',
+        uploadFailed: 'Upload failed', welcomeBack: 'Welcome back!',
+        checkEmail: 'Account created! Please check your email.', authFailed: 'Authentication failed',
+        dbConnectionFailed: 'Database connection failed', noPending: 'No pending posts',
+        noUsers: 'No users found', noBugs: 'No bug reports', noVipRequests: 'No VIP requests',
         confirmBlock: 'Are you sure you want to block this user?',
         enterFollowers: 'Enter number of followers to add:',
         paymentDemo: 'This is a demo. In production, integrate M-Pesa/Vodacom API here.',
@@ -116,107 +51,44 @@ const i18n = {
     },
     sw: {
         landingDesc: 'Shiriki ujumbe mtamu, wa kimapenzi na wa kuvutia na ulimwengu.',
-        getStarted: 'Anza',
-        login: 'Ingia',
-        signUp: 'Jiandikishe',
-        noAccount: 'Huna akaunti?',
-        hasAccount: 'Una akaunti tayari?',
-        back: 'Rudi',
-        home: 'Nyumbani',
-        search: 'Tafuta',
-        chat: 'Mazungumzo',
-        profile: 'Wasifu',
-        all: 'Zote',
-        catApology: 'Kuomba Msamaha',
-        catPraise: 'Kusifia',
-        catFlirt: 'Kuvutia',
-        catOther: 'Mengineyo',
-        newPost: 'Ujumbe Mpya',
-        category: 'Kategoria',
-        message: 'Ujumbe',
-        vipPost: 'Ujumbe wa VIP (Premium)',
-        post: 'Chapisha',
-        globalChat: 'Mazungumzo ya Ulimwengu',
-        typeMessage: 'Andika ujumbe...',
-        following: 'Unafuatilia',
-        followers: 'Wafuasi',
-        editProfile: 'Hariri Wasifu',
-        myPosts: 'Ujumbe Wangu',
-        liked: 'Uliopenda',
-        saved: 'Ulihifadhi',
-        save: 'Hifadhi',
-        username: 'Jina la Mtumiaji',
-        bio: 'Wasifu',
-        adminPanel: 'Paneli ya Msimamizi',
-        autoApprove: 'Kubali Ujumbe Kiotomatiki',
-        pendingQueue: 'Orodha ya Unayosubiri',
-        manageUsers: 'Simamia Watumiaji',
-        announcements: 'Tangazo',
-        send: 'Tuma',
-        vipRequests: 'Maombi ya VIP',
-        bugReports: 'Ripoti za Hitilafu',
-        reportBug: 'Ripoti Hitilafu',
-        description: 'Maelezo',
-        submit: 'Wasilisha',
-        editPost: 'Hariri Ujumbe',
-        unlockPremium: 'Fungua Kuntu',
-        vipDesc: 'Fungua ujumbe wa kipekee wa premium na vipengele.',
-        network: 'Mtandao',
-        phoneNumber: 'Namba ya Simu',
-        payNow: 'Lipa Sasa',
-        searchPlaceholder: 'Tafuta ujumbe...',
-        copied: 'Imenakiliwa!',
-        posted: 'Imechapishwa!',
-        deleted: 'Imefutwa!',
-        updated: 'Imesasishwa!',
-        error: 'Hitilafu imetokea',
-        loading: 'Inapakia...',
-        emptyPosts: 'Hakuna ujumbe bado',
-        emptyLiked: 'Hakuna ujumbe uliopendwa',
-        emptySaved: 'Hakuna ujumbe ulihifadhi',
-        emptyChat: 'Hakuna ujumbe bado',
-        emptySearch: 'Hakuna matokeo',
-        verifyUser: 'Thibitisha',
-        blockUser: 'Zuia',
-        addFollowers: 'Ongeza Wafuasi',
-        approve: 'Kubali',
-        reject: 'Kataa',
-        logout: 'Umetoka',
+        getStarted: 'Anza', login: 'Ingia', signUp: 'Jiandikishe',
+        noAccount: 'Huna akaunti?', hasAccount: 'Una akaunti tayari?', back: 'Rudi',
+        home: 'Nyumbani', search: 'Tafuta', chat: 'Mazungumzo', profile: 'Wasifu',
+        all: 'Zote', catApology: 'Kuomba Msamaha', catPraise: 'Kusifia', catFlirt: 'Kuvutia', catOther: 'Mengineyo',
+        newPost: 'Ujumbe Mpya', category: 'Kategoria', message: 'Ujumbe', vipPost: 'Ujumbe wa VIP (Premium)',
+        post: 'Chapisha', globalChat: 'Mazungumzo ya Ulimwengu', typeMessage: 'Andika ujumbe...',
+        following: 'Unafuatilia', followers: 'Wafuasi', editProfile: 'Hariri Wasifu',
+        myPosts: 'Ujumbe Wangu', liked: 'Uliopenda', saved: 'Ulihifadhi', save: 'Hifadhi',
+        username: 'Jina la Mtumiaji', bio: 'Wasifu', adminPanel: 'Paneli ya Msimamizi',
+        autoApprove: 'Kubali Ujumbe Kiotomatiki', pendingQueue: 'Orodha ya Unayosubiri',
+        manageUsers: 'Simamia Watumiaji', announcements: 'Tangazo', send: 'Tuma',
+        vipRequests: 'Maombi ya VIP', bugReports: 'Ripoti za Hitilafu', reportBug: 'Ripoti Hitilafu',
+        description: 'Maelezo', submit: 'Wasilisha', editPost: 'Hariri Ujumbe',
+        unlockPremium: 'Fungua Kuntu', vipDesc: 'Fungua ujumbe wa kipekee wa premium na vipengele.',
+        network: 'Mtandao', phoneNumber: 'Namba ya Simu', payNow: 'Lipa Sasa',
+        searchPlaceholder: 'Tafuta ujumbe...', copied: 'Imenakiliwa!',
+        posted: 'Imechapishwa!', deleted: 'Imefutwa!', updated: 'Imesasishwa!',
+        error: 'Hitilafu imetokea', loading: 'Inapakia...',
+        emptyPosts: 'Hakuna ujumbe bado', emptyLiked: 'Hakuna ujumbe uliopendwa',
+        emptySaved: 'Hakuna ujumbe ulihifadhi', emptyChat: 'Hakuna ujumbe bado', emptySearch: 'Hakuna matokeo',
+        verifyUser: 'Thibitisha', blockUser: 'Zuia', addFollowers: 'Ongeza Wafuasi',
+        approve: 'Kubali', reject: 'Kataa', logout: 'Umetoka',
         sessionExpired: 'Kipindi kimeisha, tafadhali ingia tena',
-        confirmDelete: 'Una uhakika unataka kufuta hii?',
-        online: 'Mtandaoni',
-        settings: 'Mipangilio',
-        appearance: 'Mwonekano',
-        darkMode: 'Hali ya Giza',
-        language: 'Lugha',
-        support: 'Msaada',
-        account: 'Akaunti',
-        logOut: 'Toka',
-        themeChanged: 'Mandhari imesasishwa',
-        pleaseLogin: 'Tafadhali ingia kwanza',
-        postCreated: 'Ujumbe umeundwa!',
-        chatSent: 'Ujumbe umetumwa!',
-        profileUpdated: 'Wasifu umesasishwa!',
-        avatarUpdated: 'Picha imesasishwa!',
-        announcementSent: 'Tangazo limetumwa!',
-        bugReported: 'Hitilafu imeripotiwa! Asante.',
-        userVerified: 'Mtumiaji amethibitishwa',
-        userBlocked: 'Mtumiaji amezuiwa',
-        followersAdded: 'Wafuasi wameongezwa',
-        postApproved: 'Ujumbe umekubaliwa',
-        postRejected: 'Ujumbe umekataliwa',
-        paymentProcessing: 'Malipo yanafanyika... (Onyesho)',
-        fillAllFields: 'Tafadhali jaza sehemu zote',
-        imageTooLarge: 'Picha kubwa mno (kubwa zaidi 2MB)',
-        uploadFailed: 'Upakiaji umeshindwa',
-        welcomeBack: 'Karibu tena!',
-        checkEmail: 'Akaunti imeundwa! Tafadhali angalia barua pepe.',
-        authFailed: 'Uthibitishaji umeshindwa',
-        dbConnectionFailed: 'Muunganiko wa hifadhidata umeshindwa',
-        noPending: 'Hakuna ujumbe unayosubiri',
-        noUsers: 'Hakuna watumiaji',
-        noBugs: 'Hakuna ripoti za hitilafu',
-        noVipRequests: 'Hakuna maombi ya VIP',
+        confirmDelete: 'Una uhakika unataka kufuta hii?', online: 'Mtandaoni',
+        settings: 'Mipangilio', appearance: 'Mwonekano', darkMode: 'Hali ya Giza',
+        language: 'Lugha', support: 'Msaada', account: 'Akaunti', logOut: 'Toka',
+        themeChanged: 'Mandhari imesasishwa', pleaseLogin: 'Tafadhali ingia kwanza',
+        postCreated: 'Ujumbe umeundwa!', chatSent: 'Ujumbe umetumwa!',
+        profileUpdated: 'Wasifu umesasishwa!', avatarUpdated: 'Picha imesasishwa!',
+        announcementSent: 'Tangazo limetumwa!', bugReported: 'Hitilafu imeripotiwa! Asante.',
+        userVerified: 'Mtumiaji amethibitishwa', userBlocked: 'Mtumiaji amezuiwa',
+        followersAdded: 'Wafuasi wameongezwa', postApproved: 'Ujumbe umekubaliwa',
+        postRejected: 'Ujumbe umekataliwa', paymentProcessing: 'Malipo yanafanyika... (Onyesho)',
+        fillAllFields: 'Tafadhali jaza sehemu zote', imageTooLarge: 'Picha kubwa mno (kubwa zaidi 2MB)',
+        uploadFailed: 'Upakiaji umeshindwa', welcomeBack: 'Karibu tena!',
+        checkEmail: 'Akaunti imeundwa! Tafadhali angalia barua pepe.', authFailed: 'Uthibitishaji umeshindwa',
+        dbConnectionFailed: 'Muunganiko wa hifadhidata umeshindwa', noPending: 'Hakuna ujumbe unayosubiri',
+        noUsers: 'Hakuna watumiaji', noBugs: 'Hakuna ripoti za hitilafu', noVipRequests: 'Hakuna maombi ya VIP',
         confirmBlock: 'Una uhakika unataka kuzuia mtumiaji huyu?',
         enterFollowers: 'Weka idadi ya wafuasi wa kuongeza:',
         paymentDemo: 'Hii ni onyesho. Katika uzalishaji, unganisha API ya M-Pesa/Vodacom hapa.',
@@ -227,8 +99,6 @@ const i18n = {
 
 let currentLang = 'en';
 let isDarkTheme = true;
-
-/* ===== APP STATE ===== */
 let sbClient = null;
 let currentUser = null;
 let currentProfile = null;
@@ -238,25 +108,28 @@ let likedPosts = new Set();
 let savedPosts = new Set();
 let chatSubscription = null;
 let postsSubscription = null;
+let profilesSubscription = null;
+let announcementsSubscription = null;
+let bugReportsSubscription = null;
 let currentCategory = 'all';
 let currentProfileTab = 'my-posts';
 let editingPostId = null;
 let autoApprove = true;
+let appInitialized = false;
 
-/* ===== DOM CACHE ===== */
 const $ = (sel) => document.querySelector(sel);
 const $$ = (sel) => document.querySelectorAll(sel);
 
-/* ===== INITIALIZATION ===== */
 document.addEventListener('DOMContentLoaded', () => {
     try {
         loadTheme();
         initSupabase();
         bindEvents();
-        checkSession();
+        setTimeout(() => {
+            if (!appInitialized) checkSession();
+        }, 500);
         applyLanguage();
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Initialization error:', err);
         showToast('Failed to initialize app', 'error');
     }
@@ -266,18 +139,35 @@ function initSupabase() {
     try {
         if (window.supabase && typeof window.supabase.createClient === 'function') {
             sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        }
-        else if (typeof createClient !== 'undefined') {
+        } else if (typeof createClient !== 'undefined') {
             sbClient = createClient(SUPABASE_URL, SUPABASE_KEY);
         }
-    }
-    catch (err) {
+        if (sbClient) {
+            sbClient.auth.onAuthStateChange((event, session) => {
+                console.log('Auth state:', event);
+                if (event === 'SIGNED_OUT') {
+                    currentUser = null; currentProfile = null; isAdmin = false;
+                    showLanding();
+                } else if (event === 'SIGNED_IN' && session) {
+                    currentUser = session.user;
+                    loadProfile().then(() => {
+                        showMainApp();
+                        showToast(getText('welcomeBack'), 'success');
+                    });
+                } else if (event === 'INITIAL_SESSION' && session) {
+                    currentUser = session.user;
+                    loadProfile().then(() => showMainApp());
+                } else if (event === 'INITIAL_SESSION' && !session) {
+                    showLanding();
+                }
+            });
+        }
+    } catch (err) {
         console.error('Supabase init error:', err);
         showToast(getText('dbConnectionFailed'), 'error');
     }
 }
 
-/* ===== THEME SYSTEM ===== */
 function loadTheme() {
     try {
         const saved = localStorage.getItem('sms-tamu-theme');
@@ -287,8 +177,7 @@ function loadTheme() {
         }
         const themeToggle = $('#theme-toggle');
         if (themeToggle) themeToggle.checked = isDarkTheme;
-    }
-    catch (e) {
+    } catch (e) {
         console.error('Theme load error:', e);
     }
 }
@@ -299,41 +188,32 @@ function toggleTheme() {
         if (isDarkTheme) {
             document.body.classList.remove('light-theme');
             localStorage.setItem('sms-tamu-theme', 'dark');
-        }
-        else {
+        } else {
             document.body.classList.add('light-theme');
             localStorage.setItem('sms-tamu-theme', 'light');
         }
         const themeToggle = $('#theme-toggle');
         if (themeToggle) themeToggle.checked = isDarkTheme;
         showToast(getText('themeChanged'), 'success');
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Theme toggle error:', err);
     }
 }
 
-/* ===== AUTH & SESSION ===== */
 async function checkSession() {
     try {
         if (!sbClient) return;
-        const {
-            data: {
-                session
-            },
-            error
-        } = await sbClient.auth.getSession();
+        appInitialized = true;
+        const { data: { session }, error } = await sbClient.auth.getSession();
         if (error) throw error;
         if (session) {
             currentUser = session.user;
             await loadProfile();
             showMainApp();
-        }
-        else {
+        } else {
             showLanding();
         }
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Session check error:', err);
         showLanding();
     }
@@ -342,38 +222,22 @@ async function checkSession() {
 async function loadProfile() {
     try {
         if (!currentUser || !sbClient) return;
-        const {
-            data,
-            error
-        } = await sbClient
-            .from('profiles')
-            .select('*')
-            .eq('id', currentUser.id)
-            .single();
+        const { data, error } = await sbClient.from('profiles').select('*').eq('id', currentUser.id).single();
         if (error && error.code !== 'PGRST116') {
             console.warn('Profile fetch error:', error.message);
         }
         if (data) {
             currentProfile = data;
             isAdmin = data.role === 'admin';
-        }
-        else {
+        } else {
             const newProfile = {
                 id: currentUser.id,
                 username: currentUser.email ? currentUser.email.split('@')[0] : 'User',
-                bio: '',
-                avatar_url: '',
-                is_verified: false,
-                role: 'user',
-                followers_count: 0,
-                following_count: 0
+                bio: '', avatar_url: '', is_verified: false, role: 'user',
+                followers_count: 0, following_count: 0
             };
-            const {
-                error: insertError
-            } = await sbClient.from('profiles').insert(newProfile);
-            if (insertError) {
-                console.warn('Profile insert error:', insertError.message);
-            }
+            const { error: insertError } = await sbClient.from('profiles').insert(newProfile);
+            if (insertError) console.warn('Profile insert error:', insertError.message);
             currentProfile = newProfile;
         }
         updateProfileUI();
@@ -381,8 +245,7 @@ async function loadProfile() {
             const adminBtn = $('#header-admin');
             if (adminBtn) adminBtn.classList.remove('hidden');
         }
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Profile load error:', err);
     }
 }
@@ -401,33 +264,19 @@ async function handleAuth(e) {
         }
         const isLogin = $('#auth-title').textContent === getText('login');
         if (isLogin) {
-            const {
-                data,
-                error
-            } = await sbClient.auth.signInWithPassword({
-                email: emailVal,
-                password: passwordVal
-            });
+            const { data, error } = await sbClient.auth.signInWithPassword({ email: emailVal, password: passwordVal });
             if (error) throw error;
             currentUser = data.user;
             await loadProfile();
             showMainApp();
             showToast(getText('welcomeBack'), 'success');
-        }
-        else {
-            const {
-                data,
-                error
-            } = await sbClient.auth.signUp({
-                email: emailVal,
-                password: passwordVal
-            });
+        } else {
+            const { data, error } = await sbClient.auth.signUp({ email: emailVal, password: passwordVal });
             if (error) throw error;
             showToast(getText('checkEmail'), 'success');
             toggleAuthMode();
         }
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Auth error:', err);
         showToast(err.message || getText('authFailed'), 'error');
     }
@@ -435,45 +284,29 @@ async function handleAuth(e) {
 
 async function handleLogout() {
     try {
-        if (chatSubscription) {
-            try {
-                chatSubscription.unsubscribe();
-            }
-            catch (e) {}
-            chatSubscription = null;
-        }
-        if (postsSubscription) {
-            try {
-                postsSubscription.unsubscribe();
-            }
-            catch (e) {}
-            postsSubscription = null;
-        }
+        unsubscribeAllChannels();
         await sbClient.auth.signOut();
-        currentUser = null;
-        currentProfile = null;
-        isAdmin = false;
-        postsCache = [];
-        likedPosts.clear();
-        savedPosts.clear();
+        currentUser = null; currentProfile = null; isAdmin = false;
+        postsCache = []; likedPosts.clear(); savedPosts.clear();
         showLanding();
         showToast(getText('logout'), 'success');
         closeModal();
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Logout error:', err);
         showToast(getText('error'), 'error');
     }
 }
 
-/* ===== NAVIGATION ===== */
-function showLanding() {
-    switchPage('landing-page');
+function unsubscribeAllChannels() {
+    if (chatSubscription) { try { chatSubscription.unsubscribe(); } catch (e) {} chatSubscription = null; }
+    if (postsSubscription) { try { postsSubscription.unsubscribe(); } catch (e) {} postsSubscription = null; }
+    if (profilesSubscription) { try { profilesSubscription.unsubscribe(); } catch (e) {} profilesSubscription = null; }
+    if (announcementsSubscription) { try { announcementsSubscription.unsubscribe(); } catch (e) {} announcementsSubscription = null; }
+    if (bugReportsSubscription) { try { bugReportsSubscription.unsubscribe(); } catch (e) {} bugReportsSubscription = null; }
 }
 
-function showAuth() {
-    switchPage('auth-page');
-}
+function showLanding() { switchPage('landing-page'); }
+function showAuth() { switchPage('auth-page'); }
 
 function showMainApp() {
     switchPage('main-app');
@@ -481,6 +314,9 @@ function showMainApp() {
     loadAnnouncements();
     if (!chatSubscription) subscribeChat();
     if (!postsSubscription) subscribePosts();
+    if (!profilesSubscription) subscribeProfiles();
+    if (!announcementsSubscription) subscribeAnnouncements();
+    if (isAdmin && !bugReportsSubscription) subscribeBugReports();
 }
 
 function switchPage(pageId) {
@@ -498,14 +334,10 @@ function switchAppPage(pageName) {
     if (navItem) navItem.classList.add('active');
     if (pageName === 'home') loadPosts();
     if (pageName === 'profile') loadProfileTab();
-    if (pageName === 'chat') {
-        loadChatMessages();
-        scrollChatToBottom();
-    }
+    if (pageName === 'chat') { loadChatMessages(); scrollChatToBottom(); }
     if (pageName === 'admin' && isAdmin) loadAdminData();
 }
 
-/* ===== POSTS ===== */
 async function loadPosts() {
     try {
         const feed = $('#posts-feed');
@@ -515,19 +347,10 @@ async function loadPosts() {
             feed.innerHTML = '<div class="empty-state"><i class="fas fa-plug"></i><p>' + getText('dbConnectionFailed') + '</p></div>';
             return;
         }
-        let query = sbClient.from('posts').select(`
-            *,
-            profiles:user_id (username, avatar_url, is_verified, role)
-        `).order('created_at', {
-            ascending: false
-        });
-        if (!isAdmin) {
-            query = query.eq('status', 'approved');
-        }
-        const {
-            data,
-            error
-        } = await query;
+        let query = sbClient.from('posts').select(`*, profiles:user_id (username, avatar_url, is_verified, role)`)
+            .order('created_at', { ascending: false });
+        if (!isAdmin) query = query.eq('status', 'approved');
+        const { data, error } = await query;
         if (error) {
             if (error.message && error.message.includes('row-level security')) {
                 showToast(getText('rlsError'), 'error');
@@ -539,13 +362,10 @@ async function loadPosts() {
             postsCache = postsCache.filter(p => p.category === currentCategory);
         }
         renderPosts(postsCache, feed);
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Load posts error:', err);
         const feed = $('#posts-feed');
-        if (feed) {
-            feed.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><p>' + getText('error') + '</p></div>';
-        }
+        if (feed) feed.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><p>' + getText('error') + '</p></div>';
     }
 }
 
@@ -571,15 +391,12 @@ function createPostCard(post) {
     const isVipLocked = isVip && !(currentProfile && currentProfile.is_vip);
     let bodyHtml = '';
     if (isVipLocked) {
-        bodyHtml = `<div class="post-vip-overlay">
-            <div class="post-body" style="filter:blur(4px);user-select:none;">${escapeHtml(post.content)}</div>
-            <button class="vip-unlock-btn" data-post="${post.id}"><i class="fas fa-crown"></i> ${getText('unlockPremium')}</button>
-        </div>`;
-    }
-    else {
+        bodyHtml = `<div class="post-vip-overlay"><div class="post-body" style="filter:blur(4px);user-select:none;">${escapeHtml(post.content)}</div><button class="vip-unlock-btn" data-post="${post.id}"><i class="fas fa-crown"></i> ${getText('unlockPremium')}</button></div>`;
+    } else {
         bodyHtml = `<div class="post-body">${escapeHtml(post.content)}</div>`;
     }
-    const verifiedBadge = profile.is_verified ? '<i class="fas fa-check-circle verified"></i>' : '';
+    // FIX: Always show verified badge if profile.is_verified is true
+    const verifiedBadge = profile.is_verified ? '<i class="fas fa-check-circle verified" title="Verified Account"></i>' : '';
     const vipBadge = (profile.role === 'vip' || isVip) ? '<i class="fas fa-star vip-badge"></i>' : '';
     const ownerActions = isOwner ? `<div class="post-owner-actions"><button class="edit-post" data-post="${post.id}"><i class="fas fa-edit"></i></button><button class="delete-post" data-post="${post.id}"><i class="fas fa-trash"></i></button></div>` : '';
     const statusBadge = isAdmin && post.status === 'pending' ? '<span style="color:var(--warning);font-size:11px;margin-left:8px;"><i class="fas fa-clock"></i> Pending</span>' : '';
@@ -595,23 +412,11 @@ function createPostCard(post) {
         ${bodyHtml}
         <div class="post-footer">
             <div class="post-actions">
-                <button class="post-action like-btn ${isLiked ? 'liked' : ''}" data-post="${post.id}">
-                    <i class="${isLiked ? 'fas' : 'far'} fa-heart"></i>
-                    <span>${post.likes_count || 0}</span>
-                </button>
-                <button class="post-action comment-btn" data-post="${post.id}">
-                    <i class="far fa-comment"></i>
-                    <span>${post.comments_count || 0}</span>
-                </button>
-                <button class="post-action copy-btn" data-post="${post.id}">
-                    <i class="far fa-copy"></i>
-                </button>
-                <button class="post-action share-btn" data-post="${post.id}">
-                    <i class="fas fa-share-alt"></i>
-                </button>
-                <button class="post-action save-btn ${isSaved ? 'saved' : ''}" data-post="${post.id}">
-                    <i class="${isSaved ? 'fas' : 'far'} fa-bookmark"></i>
-                </button>
+                <button class="post-action like-btn ${isLiked ? 'liked' : ''}" data-post="${post.id}"><i class="${isLiked ? 'fas' : 'far'} fa-heart"></i><span>${post.likes_count || 0}</span></button>
+                <button class="post-action comment-btn" data-post="${post.id}"><i class="far fa-comment"></i><span>${post.comments_count || 0}</span></button>
+                <button class="post-action copy-btn" data-post="${post.id}"><i class="far fa-copy"></i></button>
+                <button class="post-action share-btn" data-post="${post.id}"><i class="fas fa-share-alt"></i></button>
+                <button class="post-action save-btn ${isSaved ? 'saved' : ''}" data-post="${post.id}"><i class="${isSaved ? 'fas' : 'far'} fa-bookmark"></i></button>
             </div>
             ${ownerActions}
         </div>
@@ -619,30 +424,13 @@ function createPostCard(post) {
 }
 
 function bindPostActions() {
-    $$('.like-btn').forEach(btn => {
-        btn.addEventListener('click', () => handleLike(btn.dataset.post));
-    });
-    $$('.copy-btn').forEach(btn => {
-        btn.addEventListener('click', () => handleCopy(btn.dataset.post));
-    });
-    $$('.share-btn').forEach(btn => {
-        btn.addEventListener('click', () => handleShare(btn.dataset.post));
-    });
-    $$('.save-btn').forEach(btn => {
-        btn.addEventListener('click', () => handleSave(btn.dataset.post));
-    });
-    $$('.delete-post').forEach(btn => {
-        btn.addEventListener('click', () => handleDeletePost(btn.dataset.post));
-    });
-    $$('.edit-post').forEach(btn => {
-        btn.addEventListener('click', () => handleEditPost(btn.dataset.post));
-    });
-    $$('.vip-unlock-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            openModal('modal-vip');
-        });
-    });
+    $$('.like-btn').forEach(btn => btn.addEventListener('click', () => handleLike(btn.dataset.post)));
+    $$('.copy-btn').forEach(btn => btn.addEventListener('click', () => handleCopy(btn.dataset.post)));
+    $$('.share-btn').forEach(btn => btn.addEventListener('click', () => handleShare(btn.dataset.post)));
+    $$('.save-btn').forEach(btn => btn.addEventListener('click', () => handleSave(btn.dataset.post)));
+    $$('.delete-post').forEach(btn => btn.addEventListener('click', () => handleDeletePost(btn.dataset.post)));
+    $$('.edit-post').forEach(btn => btn.addEventListener('click', () => handleEditPost(btn.dataset.post)));
+    $$('.vip-unlock-btn').forEach(btn => btn.addEventListener('click', (e) => { e.stopPropagation(); openModal('modal-vip'); }));
 }
 
 async function handleLike(postId) {
@@ -653,8 +441,7 @@ async function handleLike(postId) {
         if (isLiked) {
             likedPosts.delete(postId);
             post.likes_count = Math.max(0, (post.likes_count || 0) - 1);
-        }
-        else {
+        } else {
             likedPosts.add(postId);
             post.likes_count = (post.likes_count || 0) + 1;
         }
@@ -667,12 +454,9 @@ async function handleLike(postId) {
             if (count) count.textContent = post.likes_count;
         }
         if (sbClient) {
-            await sbClient.from('posts').update({
-                likes_count: post.likes_count
-            }).eq('id', postId);
+            await sbClient.from('posts').update({ likes_count: post.likes_count }).eq('id', postId);
         }
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Like error:', err);
     }
 }
@@ -683,8 +467,7 @@ async function handleCopy(postId) {
         if (!post) return;
         await navigator.clipboard.writeText(post.content);
         showToast(getText('copied'), 'success');
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Copy error:', err);
         showToast(getText('error'), 'error');
     }
@@ -694,20 +477,14 @@ async function handleShare(postId) {
     try {
         const post = postsCache.find(p => p.id === postId);
         if (!post) return;
-        const shareData = {
-            title: 'Sms Tamu - Sweet Message',
-            text: post.content,
-            url: window.location.href
-        };
+        const shareData = { title: 'Sms Tamu - Sweet Message', text: post.content, url: window.location.href };
         if (navigator.share) {
             await navigator.share(shareData);
-        }
-        else {
+        } else {
             await navigator.clipboard.writeText(post.content + ' - Shared from Sms Tamu');
             showToast(getText('copied'), 'success');
         }
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Share error:', err);
     }
 }
@@ -715,12 +492,7 @@ async function handleShare(postId) {
 async function handleSave(postId) {
     try {
         const isSaved = savedPosts.has(postId);
-        if (isSaved) {
-            savedPosts.delete(postId);
-        }
-        else {
-            savedPosts.add(postId);
-        }
+        if (isSaved) savedPosts.delete(postId); else savedPosts.add(postId);
         const btn = $(`.save-btn[data-post="${postId}"]`);
         if (btn) {
             btn.classList.toggle('saved', !isSaved);
@@ -728,8 +500,7 @@ async function handleSave(postId) {
             if (icon) icon.className = !isSaved ? 'fas fa-bookmark' : 'far fa-bookmark';
         }
         if (currentProfileTab === 'saved') loadProfileTab();
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Save error:', err);
     }
 }
@@ -738,16 +509,13 @@ async function handleDeletePost(postId) {
     try {
         if (!confirm(getText('confirmDelete'))) return;
         if (!sbClient) return;
-        const {
-            error
-        } = await sbClient.from('posts').delete().eq('id', postId);
+        const { error } = await sbClient.from('posts').delete().eq('id', postId);
         if (error) throw error;
         postsCache = postsCache.filter(p => p.id !== postId);
         const card = $(`.post-card[data-post-id="${postId}"]`);
         if (card) card.remove();
         showToast(getText('deleted'), 'success');
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Delete error:', err);
         showToast(getText('error'), 'error');
     }
@@ -767,37 +535,48 @@ function handleEditPost(postId) {
 async function handleCreatePost(e) {
     e.preventDefault();
     try {
-        if (!currentUser) {
-            showToast(getText('pleaseLogin'), 'warning');
-            return;
-        }
-        if (!sbClient) {
-            showToast(getText('dbConnectionFailed'), 'error');
-            return;
-        }
+        if (!currentUser) { showToast(getText('pleaseLogin'), 'warning'); return; }
+        if (!sbClient) { showToast(getText('dbConnectionFailed'), 'error'); return; }
         const category = $('#post-category');
         const content = $('#post-content');
         const vipCheck = $('#post-vip');
         if (!category || !content) return;
         const contentVal = content.value.trim();
-        if (!contentVal) {
-            showToast(getText('fillAllFields'), 'warning');
-            return;
-        }
+        if (!contentVal) { showToast(getText('fillAllFields'), 'warning'); return; }
         const postData = {
-            user_id: currentUser.id,
-            content: contentVal,
-            category: category.value,
-            likes_count: 0,
-            comments_count: 0,
-            status: autoApprove ? 'approved' : 'pending',
-            is_vip: vipCheck ? vipCheck.checked : false,
-            created_at: new Date().toISOString()
+            user_id: currentUser.id, content: contentVal, category: category.value,
+            likes_count: 0, comments_count: 0, status: autoApprove ? 'approved' : 'pending',
+            is_vip: vipCheck ? vipCheck.checked : false, created_at: new Date().toISOString()
         };
-        const {
-            error
-        } = await sbClient.from('posts').insert(postData);
+        // FIX: Optimistically add post to UI immediately
+        const optimisticPost = {
+            ...postData, id: 'temp-' + Date.now(),
+            profiles: {
+                username: currentProfile?.username || 'User',
+                avatar_url: currentProfile?.avatar_url || '',
+                is_verified: currentProfile?.is_verified || false,
+                role: currentProfile?.role || 'user'
+            }
+        };
+        postsCache.unshift(optimisticPost);
+        if (currentCategory === 'all' || currentCategory === category.value) {
+            const feed = $('#posts-feed');
+            if (feed) {
+                if (feed.querySelector('.empty-state')) feed.innerHTML = '';
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = createPostCard(optimisticPost);
+                const newCard = tempDiv.firstElementChild;
+                newCard.style.opacity = '0.7';
+                newCard.style.border = '2px dashed var(--accent)';
+                feed.insertBefore(newCard, feed.firstChild);
+                bindPostActions();
+            }
+        }
+        const { error } = await sbClient.from('posts').insert(postData);
         if (error) {
+            postsCache = postsCache.filter(p => p.id !== optimisticPost.id);
+            const card = $(`.post-card[data-post-id="${optimisticPost.id}"]`);
+            if (card) card.remove();
             if (error.message && error.message.includes('row-level security')) {
                 showToast(getText('rlsError'), 'error');
             }
@@ -808,8 +587,7 @@ async function handleCreatePost(e) {
         showToast(getText('postCreated'), 'success');
         switchAppPage('home');
         loadPosts();
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Create post error:', err);
         showToast(err.message || getText('error'), 'error');
     }
@@ -822,47 +600,35 @@ async function handleUpdatePost(e) {
         const category = $('#edit-post-category');
         const content = $('#edit-post-content');
         if (!category || !content) return;
-        const {
-            error
-        } = await sbClient.from('posts').update({
-            category: category.value,
-            content: content.value.trim()
-        }).eq('id', editingPostId);
+        const { error } = await sbClient.from('posts').update({ category: category.value, content: content.value.trim() }).eq('id', editingPostId);
         if (error) throw error;
         editingPostId = null;
         closeModal();
         showToast(getText('updated'), 'success');
         loadPosts();
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Update post error:', err);
         showToast(getText('error'), 'error');
     }
 }
 
-/* ===== SEARCH ===== */
 function handleSearch() {
     try {
         const input = $('#search-input');
         const results = $('#search-results');
         if (!input || !results) return;
         const query = input.value.trim().toLowerCase();
-        if (!query) {
-            results.innerHTML = '';
-            return;
-        }
+        if (!query) { results.innerHTML = ''; return; }
         const filtered = postsCache.filter(p =>
             (p.content && p.content.toLowerCase().includes(query)) ||
             (p.category && p.category.toLowerCase().includes(query))
         );
         renderPosts(filtered, results);
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Search error:', err);
     }
 }
 
-/* ===== CHAT ===== */
 async function loadChatMessages() {
     try {
         const container = $('#chat-messages');
@@ -871,16 +637,8 @@ async function loadChatMessages() {
             container.innerHTML = '<div class="empty-state"><i class="fas fa-plug"></i><p>' + getText('dbConnectionFailed') + '</p></div>';
             return;
         }
-        const {
-            data,
-            error
-        } = await sbClient
-            .from('global_chat')
-            .select('*, profiles:user_id (username, avatar_url)')
-            .order('created_at', {
-                ascending: true
-            })
-            .limit(100);
+        const { data, error } = await sbClient.from('global_chat').select('*, profiles:user_id (username, avatar_url)')
+            .order('created_at', { ascending: true }).limit(100);
         if (error) {
             if (error.message && error.message.includes('row-level security')) {
                 showToast(getText('rlsError'), 'error');
@@ -888,13 +646,10 @@ async function loadChatMessages() {
             throw error;
         }
         renderChatMessages(data || [], container);
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Chat load error:', err);
         const container = $('#chat-messages');
-        if (container) {
-            container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><p>' + getText('error') + '</p></div>';
-        }
+        if (container) container.innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-circle"></i><p>' + getText('error') + '</p></div>';
     }
 }
 
@@ -908,11 +663,7 @@ function renderChatMessages(messages, container) {
         const isOwn = currentUser && msg.user_id === currentUser.id;
         const profile = msg.profiles || {};
         const time = formatTime(msg.created_at);
-        return `<div class="chat-bubble ${isOwn ? 'own' : 'other'}">
-            ${!isOwn ? '<div class="chat-author">' + escapeHtml(profile.username || 'User') + '</div>' : ''}
-            <div>${escapeHtml(msg.message)}</div>
-            <div class="chat-time">${time}</div>
-        </div>`;
+        return `<div class="chat-bubble ${isOwn ? 'own' : 'other'}">${!isOwn ? '<div class="chat-author">' + escapeHtml(profile.username || 'User') + '</div>' : ''}<div>${escapeHtml(msg.message)}</div><div class="chat-time">${time}</div></div>`;
     }).join('');
     scrollChatToBottom();
 }
@@ -926,37 +677,22 @@ async function handleSendChat() {
     try {
         const input = $('#chat-input');
         if (!input || !input.value.trim()) return;
-        if (!currentUser) {
-            showToast(getText('pleaseLogin'), 'warning');
-            return;
-        }
-        if (!sbClient) {
-            showToast(getText('dbConnectionFailed'), 'error');
-            return;
-        }
+        if (!currentUser) { showToast(getText('pleaseLogin'), 'warning'); return; }
+        if (!sbClient) { showToast(getText('dbConnectionFailed'), 'error'); return; }
         const message = input.value.trim();
         input.value = '';
-        const {
-            error
-        } = await sbClient.from('global_chat').insert({
-            user_id: currentUser.id,
-            message: message,
-            created_at: new Date().toISOString()
+        const { error } = await sbClient.from('global_chat').insert({
+            user_id: currentUser.id, message: message, created_at: new Date().toISOString()
         });
         if (error) {
             if (error.message && error.message.includes('row-level security')) {
                 showToast(getText('rlsError'), 'error');
-            }
-            else {
-                throw error;
-            }
-        }
-        else {
+            } else throw error;
+        } else {
             showToast(getText('chatSent'), 'success');
             loadChatMessages();
         }
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Chat send error:', err);
         showToast(err.message || getText('error'), 'error');
     }
@@ -965,19 +701,11 @@ async function handleSendChat() {
 function subscribeChat() {
     try {
         if (!sbClient) return;
-        chatSubscription = sbClient
-            .channel('global_chat_changes')
-            .on('postgres_changes', {
-                event: 'INSERT',
-                schema: 'public',
-                table: 'global_chat'
-            }, () => {
-                loadChatMessages();
-            })
+        chatSubscription = sbClient.channel('global_chat_changes')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'global_chat' }, () => { loadChatMessages(); })
             .subscribe();
         loadChatMessages();
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Chat subscription error:', err);
     }
 }
@@ -985,23 +713,72 @@ function subscribeChat() {
 function subscribePosts() {
     try {
         if (!sbClient) return;
-        postsSubscription = sbClient
-            .channel('posts_changes')
-            .on('postgres_changes', {
-                event: '*',
-                schema: 'public',
-                table: 'posts'
-            }, () => {
-                loadPosts();
-            })
+        postsSubscription = sbClient.channel('posts_changes')
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'posts' }, () => { loadPosts(); })
             .subscribe();
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Posts subscription error:', err);
     }
 }
 
-/* ===== PROFILE ===== */
+// FIX: Subscribe to profile changes for real-time verification updates
+function subscribeProfiles() {
+    try {
+        if (!sbClient) return;
+        profilesSubscription = sbClient.channel('profiles_changes')
+            .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'profiles' }, (payload) => {
+                const updatedProfile = payload.new;
+                let needsReRender = false;
+                postsCache.forEach(post => {
+                    if (post.profiles && post.user_id === updatedProfile.id) {
+                        post.profiles = { ...post.profiles, ...updatedProfile };
+                        needsReRender = true;
+                    }
+                });
+                if (currentUser && updatedProfile.id === currentUser.id) {
+                    currentProfile = { ...currentProfile, ...updatedProfile };
+                    isAdmin = updatedProfile.role === 'admin';
+                    updateProfileUI();
+                }
+                if (needsReRender) {
+                    const feed = $('#posts-feed');
+                    if (feed && $('#page-home').classList.contains('active')) renderPosts(postsCache, feed);
+                    if ($('#page-profile').classList.contains('active')) loadProfileTab();
+                    if ($('#page-search').classList.contains('active')) handleSearch();
+                }
+            })
+            .subscribe();
+    } catch (err) {
+        console.error('Profiles subscription error:', err);
+    }
+}
+
+// FIX: Subscribe to announcements for real-time updates
+function subscribeAnnouncements() {
+    try {
+        if (!sbClient) return;
+        announcementsSubscription = sbClient.channel('announcements_changes')
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'announcements' }, () => { loadAnnouncements(); })
+            .subscribe();
+    } catch (err) {
+        console.error('Announcements subscription error:', err);
+    }
+}
+
+// FIX: Subscribe to bug reports for admin real-time updates
+function subscribeBugReports() {
+    try {
+        if (!sbClient || !isAdmin) return;
+        bugReportsSubscription = sbClient.channel('bug_reports_changes')
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'bug_reports' }, () => {
+                if ($('#page-admin').classList.contains('active')) loadAdminBugs();
+            })
+            .subscribe();
+    } catch (err) {
+        console.error('Bug reports subscription error:', err);
+    }
+}
+
 function updateProfileUI() {
     try {
         if (!currentProfile) return;
@@ -1017,8 +794,23 @@ function updateProfileUI() {
         }
         if (followingEl) followingEl.textContent = currentProfile.following_count || 0;
         if (followersEl) followersEl.textContent = currentProfile.followers_count || 0;
-    }
-    catch (err) {
+        // FIX: Show verified badge on profile header
+        const profileInfo = $('.profile-info');
+        if (profileInfo) {
+            let verifiedBadge = $('#profile-verified-badge');
+            if (currentProfile.is_verified) {
+                if (!verifiedBadge) {
+                    verifiedBadge = document.createElement('span');
+                    verifiedBadge.id = 'profile-verified-badge';
+                    verifiedBadge.innerHTML = '<i class="fas fa-check-circle" style="color:var(--verified);margin-left:6px;font-size:18px;" title="Verified Account"></i>';
+                    const h3 = profileInfo.querySelector('h3');
+                    if (h3) h3.appendChild(verifiedBadge);
+                }
+            } else if (verifiedBadge) {
+                verifiedBadge.remove();
+            }
+        }
+    } catch (err) {
         console.error('Profile UI error:', err);
     }
 }
@@ -1028,23 +820,16 @@ function loadProfileTab() {
         const container = $('#profile-content');
         if (!container) return;
         let posts = [];
-        if (currentProfileTab === 'my-posts') {
-            posts = postsCache.filter(p => currentUser && p.user_id === currentUser.id);
-        }
-        else if (currentProfileTab === 'liked') {
-            posts = postsCache.filter(p => likedPosts.has(p.id));
-        }
-        else if (currentProfileTab === 'saved') {
-            posts = postsCache.filter(p => savedPosts.has(p.id));
-        }
+        if (currentProfileTab === 'my-posts') posts = postsCache.filter(p => currentUser && p.user_id === currentUser.id);
+        else if (currentProfileTab === 'liked') posts = postsCache.filter(p => likedPosts.has(p.id));
+        else if (currentProfileTab === 'saved') posts = postsCache.filter(p => savedPosts.has(p.id));
         if (!posts || posts.length === 0) {
             const emptyKey = currentProfileTab === 'my-posts' ? 'emptyPosts' : currentProfileTab === 'liked' ? 'emptyLiked' : 'emptySaved';
             container.innerHTML = '<div class="empty-state"><i class="fas fa-inbox"></i><p>' + getText(emptyKey) + '</p></div>';
             return;
         }
         renderPosts(posts, container);
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Profile tab error:', err);
     }
 }
@@ -1053,37 +838,18 @@ async function handleAvatarUpload(e) {
     try {
         const file = e.target.files[0];
         if (!file || !currentUser) return;
-        if (file.size > 2 * 1024 * 1024) {
-            showToast(getText('imageTooLarge'), 'warning');
-            return;
-        }
-        if (!sbClient) {
-            showToast(getText('dbConnectionFailed'), 'error');
-            return;
-        }
+        if (file.size > 2 * 1024 * 1024) { showToast(getText('imageTooLarge'), 'warning'); return; }
+        if (!sbClient) { showToast(getText('dbConnectionFailed'), 'error'); return; }
         const fileExt = file.name.split('.').pop();
         const fileName = `${currentUser.id}-${Date.now()}.${fileExt}`;
-        const {
-            error: uploadError
-        } = await sbClient.storage
-            .from('avatars')
-            .upload(fileName, file);
+        const { error: uploadError } = await sbClient.storage.from('avatars').upload(fileName, file);
         if (uploadError) throw uploadError;
-        const {
-            data: {
-                publicUrl
-            }
-        } = sbClient.storage
-            .from('avatars')
-            .getPublicUrl(fileName);
-        await sbClient.from('profiles').update({
-            avatar_url: publicUrl
-        }).eq('id', currentUser.id);
+        const { data: { publicUrl } } = sbClient.storage.from('avatars').getPublicUrl(fileName);
+        await sbClient.from('profiles').update({ avatar_url: publicUrl }).eq('id', currentUser.id);
         currentProfile.avatar_url = publicUrl;
         updateProfileUI();
         showToast(getText('avatarUpdated'), 'success');
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Avatar upload error:', err);
         showToast(getText('uploadFailed'), 'error');
     }
@@ -1095,29 +861,19 @@ async function handleEditProfile(e) {
         const username = $('#edit-username');
         const bio = $('#edit-bio');
         if (!username || !currentUser || !sbClient) return;
-        const updates = {
-            username: username.value.trim(),
-            bio: bio ? bio.value.trim() : ''
-        };
-        const {
-            error
-        } = await sbClient.from('profiles').update(updates).eq('id', currentUser.id);
+        const updates = { username: username.value.trim(), bio: bio ? bio.value.trim() : '' };
+        const { error } = await sbClient.from('profiles').update(updates).eq('id', currentUser.id);
         if (error) throw error;
-        currentProfile = {
-            ...currentProfile,
-            ...updates
-        };
+        currentProfile = { ...currentProfile, ...updates };
         updateProfileUI();
         closeModal();
         showToast(getText('profileUpdated'), 'success');
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Edit profile error:', err);
         showToast(getText('error'), 'error');
     }
 }
 
-/* ===== ADMIN ===== */
 async function loadAdminData() {
     try {
         if (!isAdmin) return;
@@ -1125,8 +881,7 @@ async function loadAdminData() {
         await loadAdminUsers();
         await loadAdminVipRequests();
         await loadAdminBugs();
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Admin load error:', err);
     }
 }
@@ -1135,33 +890,15 @@ async function loadPendingPosts() {
     try {
         const list = $('#admin-pending-list');
         if (!list || !sbClient) return;
-        const {
-            data,
-            error
-        } = await sbClient
-            .from('posts')
-            .select('*, profiles:user_id (username)')
-            .eq('status', 'pending')
-            .order('created_at', {
-                ascending: false
-            });
+        const { data, error } = await sbClient.from('posts').select('*, profiles:user_id (username)')
+            .eq('status', 'pending').order('created_at', { ascending: false });
         if (error) throw error;
         if (!data || data.length === 0) {
             list.innerHTML = '<div class="admin-list-item"><div class="item-info">' + getText('noPending') + '</div></div>';
             return;
         }
-        list.innerHTML = data.map(post => `<div class="admin-list-item">
-            <div class="item-info">
-                <strong>${escapeHtml(post.profiles?.username || 'User')}</strong><br>
-                <small>${escapeHtml((post.content || '').substring(0, 60))}${(post.content || '').length > 60 ? '...' : ''}</small>
-            </div>
-            <div class="item-actions">
-                <button onclick="adminApprovePost('${post.id}')">${getText('approve')}</button>
-                <button class="danger" onclick="adminRejectPost('${post.id}')">${getText('reject')}</button>
-            </div>
-        </div>`).join('');
-    }
-    catch (err) {
+        list.innerHTML = data.map(post => `<div class="admin-list-item"><div class="item-info"><strong>${escapeHtml(post.profiles?.username || 'User')}</strong><br><small>${escapeHtml((post.content || '').substring(0, 60))}${(post.content || '').length > 60 ? '...' : ''}</small></div><div class="item-actions"><button onclick="adminApprovePost('${post.id}')">${getText('approve')}</button><button class="danger" onclick="adminRejectPost('${post.id}')">${getText('reject')}</button></div></div>`).join('');
+    } catch (err) {
         console.error('Pending posts error:', err);
     }
 }
@@ -1170,35 +907,14 @@ async function loadAdminUsers() {
     try {
         const list = $('#admin-users-list');
         if (!list || !sbClient) return;
-        const {
-            data,
-            error
-        } = await sbClient
-            .from('profiles')
-            .select('*')
-            .order('created_at', {
-                ascending: false
-            })
-            .limit(50);
+        const { data, error } = await sbClient.from('profiles').select('*').order('created_at', { ascending: false }).limit(50);
         if (error) throw error;
         if (!data || data.length === 0) {
             list.innerHTML = '<div class="admin-list-item"><div class="item-info">' + getText('noUsers') + '</div></div>';
             return;
         }
-        list.innerHTML = data.map(user => `<div class="admin-list-item">
-            <div class="item-info">
-                <strong>${escapeHtml(user.username || 'User')}</strong>
-                ${user.is_verified ? '<i class="fas fa-check-circle" style="color:var(--verified);margin-left:4px;"></i>' : ''}
-                <br><small>${user.followers_count || 0} followers</small>
-            </div>
-            <div class="item-actions">
-                <button onclick="adminVerifyUser('${user.id}', ${!user.is_verified})">${user.is_verified ? 'Unverify' : getText('verifyUser')}</button>
-                <button class="gold" onclick="adminAddFollowers('${user.id}')">${getText('addFollowers')}</button>
-                <button class="danger" onclick="adminBlockUser('${user.id}')">${getText('blockUser')}</button>
-            </div>
-        </div>`).join('');
-    }
-    catch (err) {
+        list.innerHTML = data.map(user => `<div class="admin-list-item"><div class="item-info"><strong>${escapeHtml(user.username || 'User')}</strong>${user.is_verified ? '<i class="fas fa-check-circle" style="color:var(--verified);margin-left:4px;"></i>' : ''}<br><small>${user.followers_count || 0} followers</small></div><div class="item-actions"><button onclick="adminVerifyUser('${user.id}', ${!user.is_verified})">${user.is_verified ? 'Unverify' : getText('verifyUser')}</button><button class="gold" onclick="adminAddFollowers('${user.id}')">${getText('addFollowers')}</button><button class="danger" onclick="adminBlockUser('${user.id}')">${getText('blockUser')}</button></div></div>`).join('');
+    } catch (err) {
         console.error('Admin users error:', err);
     }
 }
@@ -1208,8 +924,7 @@ async function loadAdminVipRequests() {
         const list = $('#admin-vip-list');
         if (!list) return;
         list.innerHTML = '<div class="admin-list-item"><div class="item-info">' + getText('noVipRequests') + '</div></div>';
-    }
-    catch (err) {
+    } catch (err) {
         console.error('VIP requests error:', err);
     }
 }
@@ -1218,48 +933,25 @@ async function loadAdminBugs() {
     try {
         const list = $('#admin-bug-list');
         if (!list || !sbClient) return;
-        const {
-            data,
-            error
-        } = await sbClient
-            .from('bug_reports')
-            .select('*')
-            .order('created_at', {
-                ascending: false
-            })
-            .limit(20);
+        const { data, error } = await sbClient.from('bug_reports').select('*').order('created_at', { ascending: false }).limit(20);
         if (error) throw error;
         if (!data || data.length === 0) {
             list.innerHTML = '<div class="admin-list-item"><div class="item-info">' + getText('noBugs') + '</div></div>';
             return;
         }
-        list.innerHTML = data.map(bug => `<div class="admin-list-item">
-            <div class="item-info">
-                <strong>${escapeHtml(bug.user_email || 'Anonymous')}</strong><br>
-                <small>${escapeHtml((bug.description || '').substring(0, 80))}${(bug.description || '').length > 80 ? '...' : ''}</small>
-            </div>
-            <div class="item-actions">
-                <button class="danger" onclick="adminDeleteBug('${bug.id}')">Delete</button>
-            </div>
-        </div>`).join('');
-    }
-    catch (err) {
+        list.innerHTML = data.map(bug => `<div class="admin-list-item"><div class="item-info"><strong>${escapeHtml(bug.user_email || 'Anonymous')}</strong><br><small>${escapeHtml((bug.description || '').substring(0, 80))}${(bug.description || '').length > 80 ? '...' : ''}</small></div><div class="item-actions"><button class="danger" onclick="adminDeleteBug('${bug.id}')">Delete</button></div></div>`).join('');
+    } catch (err) {
         console.error('Bug reports error:', err);
     }
 }
 
-/* Admin Actions */
 window.adminApprovePost = async function(postId) {
     try {
         if (!sbClient) return;
-        await sbClient.from('posts').update({
-            status: 'approved'
-        }).eq('id', postId);
+        await sbClient.from('posts').update({ status: 'approved' }).eq('id', postId);
         showToast(getText('postApproved'), 'success');
-        loadPendingPosts();
-        loadPosts();
-    }
-    catch (err) {
+        loadPendingPosts(); loadPosts();
+    } catch (err) {
         console.error(err);
         showToast(getText('error'), 'error');
     }
@@ -1271,8 +963,7 @@ window.adminRejectPost = async function(postId) {
         await sbClient.from('posts').delete().eq('id', postId);
         showToast(getText('postRejected'), 'success');
         loadPendingPosts();
-    }
-    catch (err) {
+    } catch (err) {
         console.error(err);
         showToast(getText('error'), 'error');
     }
@@ -1281,13 +972,11 @@ window.adminRejectPost = async function(postId) {
 window.adminVerifyUser = async function(userId, verify) {
     try {
         if (!sbClient) return;
-        await sbClient.from('profiles').update({
-            is_verified: verify
-        }).eq('id', userId);
+        await sbClient.from('profiles').update({ is_verified: verify }).eq('id', userId);
         showToast(verify ? getText('userVerified') : 'User unverified', 'success');
         loadAdminUsers();
-    }
-    catch (err) {
+        loadPosts(); // FIX: Reload posts so badge appears immediately
+    } catch (err) {
         console.error(err);
         showToast(getText('error'), 'error');
     }
@@ -1300,17 +989,12 @@ window.adminAddFollowers = async function(userId) {
         if (!num) return;
         const count = parseInt(num);
         if (isNaN(count) || count < 0) return;
-        const {
-            data
-        } = await sbClient.from('profiles').select('followers_count').eq('id', userId).single();
+        const { data } = await sbClient.from('profiles').select('followers_count').eq('id', userId).single();
         const newCount = (data?.followers_count || 0) + count;
-        await sbClient.from('profiles').update({
-            followers_count: newCount
-        }).eq('id', userId);
+        await sbClient.from('profiles').update({ followers_count: newCount }).eq('id', userId);
         showToast(getText('followersAdded'), 'success');
         loadAdminUsers();
-    }
-    catch (err) {
+    } catch (err) {
         console.error(err);
         showToast(getText('error'), 'error');
     }
@@ -1320,13 +1004,10 @@ window.adminBlockUser = async function(userId) {
     try {
         if (!sbClient) return;
         if (!confirm(getText('confirmBlock'))) return;
-        await sbClient.from('profiles').update({
-            role: 'blocked'
-        }).eq('id', userId);
+        await sbClient.from('profiles').update({ role: 'blocked' }).eq('id', userId);
         showToast(getText('userBlocked'), 'success');
         loadAdminUsers();
-    }
-    catch (err) {
+    } catch (err) {
         console.error(err);
         showToast(getText('error'), 'error');
     }
@@ -1338,37 +1019,27 @@ window.adminDeleteBug = async function(bugId) {
         await sbClient.from('bug_reports').delete().eq('id', bugId);
         showToast('Bug report deleted', 'success');
         loadAdminBugs();
-    }
-    catch (err) {
+    } catch (err) {
         console.error(err);
         showToast(getText('error'), 'error');
     }
 };
 
-/* ===== ANNOUNCEMENTS ===== */
 async function loadAnnouncements() {
     try {
         const banner = $('#announcement-banner');
         const text = $('#announcement-text');
         if (!banner || !text || !sbClient) return;
-        const {
-            data,
-            error
-        } = await sbClient
-            .from('announcements')
-            .select('*')
-            .order('created_at', {
-                ascending: false
-            })
-            .limit(1)
-            .single();
+        const { data, error } = await sbClient.from('announcements').select('*')
+            .order('created_at', { ascending: false }).limit(1).single();
         if (error && error.code !== 'PGRST116') throw error;
         if (data && data.content) {
             text.textContent = data.content;
             banner.classList.remove('hidden');
+        } else {
+            banner.classList.add('hidden');
         }
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Announcements error:', err);
     }
 }
@@ -1377,53 +1048,54 @@ async function handleAnnouncement() {
     try {
         const input = $('#admin-announcement');
         if (!input || !input.value.trim() || !sbClient) return;
-        const {
-            error
-        } = await sbClient.from('announcements').insert({
-            content: input.value.trim(),
-            created_at: new Date().toISOString()
+        const { error } = await sbClient.from('announcements').insert({
+            content: input.value.trim(), created_at: new Date().toISOString()
         });
         if (error) throw error;
         input.value = '';
         showToast(getText('announcementSent'), 'success');
         loadAnnouncements();
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Announcement error:', err);
         showToast(getText('error'), 'error');
     }
 }
 
-/* ===== BUG REPORT ===== */
+window.adminDeleteAnnouncements = async function() {
+    try {
+        if (!sbClient || !isAdmin) return;
+        if (!confirm('Delete all announcements? This will clear the banner for all users.')) return;
+        const { error } = await sbClient.from('announcements').delete().neq('id', '00000000-0000-0000-0000-000000000000');
+        if (error) throw error;
+        showToast('All announcements deleted', 'success');
+        loadAnnouncements();
+    } catch (err) {
+        console.error(err);
+        showToast(getText('error'), 'error');
+    }
+};
+
 async function handleBugReport(e) {
     e.preventDefault();
     try {
         const desc = $('#bug-desc');
         if (!desc || !desc.value.trim()) return;
-        if (!sbClient) {
-            showToast(getText('dbConnectionFailed'), 'error');
-            return;
-        }
-        const {
-            error
-        } = await sbClient.from('bug_reports').insert({
+        if (!sbClient) { showToast(getText('dbConnectionFailed'), 'error'); return; }
+        const { error } = await sbClient.from('bug_reports').insert({
             user_id: currentUser ? currentUser.id : null,
             user_email: currentUser ? currentUser.email : 'anonymous',
-            description: desc.value.trim(),
-            created_at: new Date().toISOString()
+            description: desc.value.trim(), created_at: new Date().toISOString()
         });
         if (error) throw error;
         desc.value = '';
         closeModal();
         showToast(getText('bugReported'), 'success');
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Bug report error:', err);
         showToast(getText('error'), 'error');
     }
 }
 
-/* ===== MODALS ===== */
 function openModal(modalId) {
     const overlay = $('#modal-overlay');
     const modal = $('#' + modalId);
@@ -1440,7 +1112,6 @@ function closeModal() {
     $$('.modal').forEach(m => m.classList.add('hidden'));
 }
 
-/* ===== LANGUAGE ===== */
 function toggleLanguage() {
     currentLang = currentLang === 'en' ? 'sw' : 'en';
     const btn = $('#lang-toggle');
@@ -1462,8 +1133,7 @@ function applyLanguage() {
             const key = el.getAttribute('data-i18n-placeholder');
             if (dict[key]) el.placeholder = dict[key];
         });
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Language error:', err);
     }
 }
@@ -1472,7 +1142,6 @@ function getText(key) {
     return i18n[currentLang]?.[key] || i18n['en']?.[key] || key;
 }
 
-/* ===== TOASTS ===== */
 function showToast(message, type) {
     try {
         const container = $('#toast-container');
@@ -1482,16 +1151,12 @@ function showToast(message, type) {
         const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : type === 'warning' ? 'fa-exclamation-triangle' : 'fa-info-circle';
         toast.innerHTML = `<i class="fas ${icon}"></i> ${escapeHtml(message)}`;
         container.appendChild(toast);
-        setTimeout(() => {
-            if (toast.parentNode) toast.parentNode.removeChild(toast);
-        }, 3000);
-    }
-    catch (err) {
+        setTimeout(() => { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 3000);
+    } catch (err) {
         console.error('Toast error:', err);
     }
 }
 
-/* ===== UTILITIES ===== */
 function escapeHtml(text) {
     if (!text) return '';
     const div = document.createElement('div');
@@ -1513,8 +1178,7 @@ function formatTime(dateString) {
         if (hours < 24) return hours + 'h ago';
         if (days < 7) return days + 'd ago';
         return date.toLocaleDateString();
-    }
-    catch (err) {
+    } catch (err) {
         return dateString || '';
     }
 }
@@ -1531,49 +1195,30 @@ function toggleAuthMode() {
         submit.textContent = isLogin ? getText('signUp') : getText('login');
         if (toggleText) toggleText.textContent = isLogin ? getText('hasAccount') : getText('noAccount');
         if (toggleLink) toggleLink.textContent = isLogin ? getText('login') : getText('signUp');
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Auth toggle error:', err);
     }
 }
 
-/* ===== EVENT BINDING ===== */
 function bindEvents() {
     try {
-        // Landing
         const getStarted = $('#get-started-btn');
         if (getStarted) getStarted.addEventListener('click', showAuth);
-
-        // Language (landing page)
         const langToggle = $('#lang-toggle');
         if (langToggle) langToggle.addEventListener('click', toggleLanguage);
-
-        // Auth
         const authForm = $('#auth-form');
         if (authForm) authForm.addEventListener('submit', handleAuth);
         const authToggle = $('#auth-toggle-link');
-        if (authToggle) authToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            toggleAuthMode();
-        });
+        if (authToggle) authToggle.addEventListener('click', (e) => { e.preventDefault(); toggleAuthMode(); });
         const authBack = $('#auth-back');
         if (authBack) authBack.addEventListener('click', showLanding);
-
-        // Bottom Nav
         $$('.nav-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const page = item.dataset.page;
-                if (page) switchAppPage(page);
-            });
+            item.addEventListener('click', () => { const page = item.dataset.page; if (page) switchAppPage(page); });
         });
-
-        // Header
         const settingsBtn = $('#header-settings');
         if (settingsBtn) settingsBtn.addEventListener('click', () => openModal('modal-settings'));
         const adminBtn = $('#header-admin');
         if (adminBtn) adminBtn.addEventListener('click', () => switchAppPage('admin'));
-
-        // Category filter
         $$('.cat-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 $$('.cat-btn').forEach(b => b.classList.remove('active'));
@@ -1582,28 +1227,16 @@ function bindEvents() {
                 loadPosts();
             });
         });
-
-        // Add post
         const addPostForm = $('#add-post-form');
         if (addPostForm) addPostForm.addEventListener('submit', handleCreatePost);
-
-        // Edit post
         const editPostForm = $('#edit-post-form');
         if (editPostForm) editPostForm.addEventListener('submit', handleUpdatePost);
-
-        // Search
         const searchInput = $('#search-input');
         if (searchInput) searchInput.addEventListener('input', debounce(handleSearch, 300));
-
-        // Chat
         const chatSend = $('#chat-send');
         if (chatSend) chatSend.addEventListener('click', handleSendChat);
         const chatInput = $('#chat-input');
-        if (chatInput) chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleSendChat();
-        });
-
-        // Profile
+        if (chatInput) chatInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSendChat(); });
         const profileEditBtn = $('#profile-edit-btn');
         if (profileEditBtn) profileEditBtn.addEventListener('click', () => {
             const username = $('#edit-username');
@@ -1612,25 +1245,14 @@ function bindEvents() {
             if (bio) bio.value = currentProfile?.bio || '';
             openModal('modal-edit-profile');
         });
-
-        // Profile Settings button
         const profileSettingsBtn = $('#profile-settings-btn');
-        if (profileSettingsBtn) profileSettingsBtn.addEventListener('click', () => {
-            openModal('modal-settings');
-        });
-
+        if (profileSettingsBtn) profileSettingsBtn.addEventListener('click', () => openModal('modal-settings'));
         const editProfileForm = $('#edit-profile-form');
         if (editProfileForm) editProfileForm.addEventListener('submit', handleEditProfile);
-
         const avatarInput = $('#avatar-input');
         if (avatarInput) avatarInput.addEventListener('change', handleAvatarUpload);
-
         const avatarEdit = $('#avatar-edit');
-        if (avatarEdit) avatarEdit.addEventListener('click', () => {
-            if (avatarInput) avatarInput.click();
-        });
-
-        // Profile tabs
+        if (avatarEdit) avatarEdit.addEventListener('click', () => { if (avatarInput) avatarInput.click(); });
         $$('.profile-tab').forEach(tab => {
             tab.addEventListener('click', () => {
                 $$('.profile-tab').forEach(t => t.classList.remove('active'));
@@ -1639,76 +1261,39 @@ function bindEvents() {
                 loadProfileTab();
             });
         });
-
-        // Admin
         const autoApproveToggle = $('#admin-auto-approve');
-        if (autoApproveToggle) autoApproveToggle.addEventListener('change', (e) => {
-            autoApprove = e.target.checked;
-        });
-
+        if (autoApproveToggle) autoApproveToggle.addEventListener('change', (e) => { autoApprove = e.target.checked; });
         const announceBtn = $('#admin-announce-btn');
         if (announceBtn) announceBtn.addEventListener('click', handleAnnouncement);
-
-        // Settings modal actions
         const themeToggle = $('#theme-toggle');
         if (themeToggle) themeToggle.addEventListener('change', toggleTheme);
-
         const settingsLangToggle = $('#settings-lang-toggle');
         if (settingsLangToggle) settingsLangToggle.addEventListener('click', toggleLanguage);
-
         const settingsReportBtn = $('#settings-report-btn');
-        if (settingsReportBtn) settingsReportBtn.addEventListener('click', () => {
-            closeModal();
-            setTimeout(() => openModal('modal-bug'), 300);
-        });
-
+        if (settingsReportBtn) settingsReportBtn.addEventListener('click', () => { closeModal(); setTimeout(() => openModal('modal-bug'), 300); });
         const settingsLogoutBtn = $('#settings-logout-btn');
         if (settingsLogoutBtn) settingsLogoutBtn.addEventListener('click', handleLogout);
-
-        // Bug report
         const bugForm = $('#bug-report-form');
         if (bugForm) bugForm.addEventListener('submit', handleBugReport);
-
-        // Modals
-        $$('.modal-close').forEach(btn => {
-            btn.addEventListener('click', closeModal);
-        });
-
+        $$('.modal-close').forEach(btn => btn.addEventListener('click', closeModal));
         const modalOverlay = $('#modal-overlay');
-        if (modalOverlay) modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) closeModal();
-        });
-
-        // Announcement close
+        if (modalOverlay) modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+        // FIX: Remove user close button for announcements - only admin can delete via admin panel
         const announceClose = $('#announcement-close');
-        if (announceClose) announceClose.addEventListener('click', () => {
-            const banner = $('#announcement-banner');
-            if (banner) banner.classList.add('hidden');
-        });
-
-        // VIP pay
-        const vipPayBtn = $('#vip-pay-btn');
-        if (vipPayBtn) vipPayBtn.addEventListener('click', () => {
-            showToast(getText('paymentDemo'), 'warning');
-            closeModal();
-        });
-
-        // Auth state listener
-        if (sbClient) {
-            sbClient.auth.onAuthStateChange((event, session) => {
-                if (event === 'SIGNED_OUT') {
-                    currentUser = null;
-                    currentProfile = null;
-                    isAdmin = false;
-                }
-                else if (event === 'SIGNED_IN' && session) {
-                    currentUser = session.user;
-                    loadProfile();
+        if (announceClose) {
+            // Only allow admin to close, otherwise hide the button for non-admins
+            announceClose.addEventListener('click', () => {
+                if (isAdmin) {
+                    const banner = $('#announcement-banner');
+                    if (banner) banner.classList.add('hidden');
+                } else {
+                    showToast('Only admin can remove announcements', 'warning');
                 }
             });
         }
-    }
-    catch (err) {
+        const vipPayBtn = $('#vip-pay-btn');
+        if (vipPayBtn) vipPayBtn.addEventListener('click', () => { showToast(getText('paymentDemo'), 'warning'); closeModal(); });
+    } catch (err) {
         console.error('Event binding error:', err);
     }
 }
@@ -1716,12 +1301,8 @@ function bindEvents() {
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
+        const later = () => { clearTimeout(timeout); func(...args); };
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
     };
-}
-
+            }
