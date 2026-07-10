@@ -1,7 +1,7 @@
 /* ===== SMS TAMU - Main Application ===== */
 /* Supabase Configuration - Replace with your own credentials */
-const SUPABASE_URL = 'https://your-project.supabase.co';
-const SUPABASE_KEY = 'your-anon-key';
+const SUPABASE_URL = 'https://lvfvdzmabmokivpmkxuq.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_0aiiuU-He1wJJVdgNwdKYg_HeTfu1wh';
 
 /* ===== LANGUAGE DICTIONARY (i18n) ===== */
 const i18n = {
