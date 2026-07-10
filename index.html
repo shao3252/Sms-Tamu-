@@ -222,6 +222,10 @@
                                 <textarea id="admin-announcement" rows="3" placeholder="Type announcement..."></textarea>
                             </div>
                             <button id="admin-announce-btn" class="btn-primary btn-sm" data-i18n="send">Send</button>
+                            <!-- FIX: Admin can delete all announcements to clear the banner -->
+                            <button onclick="adminDeleteAnnouncements()" class="btn-outline btn-sm" style="margin-top:8px;width:100%;color:var(--danger);border-color:var(--danger);">
+                                <i class="fas fa-trash"></i> Delete All Announcements
+                            </button>
                         </div>
                         <div class="admin-card">
                             <h3 data-i18n="vipRequests">VIP Requests</h3>
