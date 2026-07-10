@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sms Tamu - Sweet Messages</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script>
+        window.onerror = function(msg, url, line, col, error) {
+            console.error('Global Error:', msg, 'at', url, 'line', line, 'col', col);
+            return true;
+        };
+    </script>
+</head>
+<body>
+    <div id="app">
+        <!-- Landing Page -->
+        <div id="landing-page" class="page active">
+            <div class="lang-switcher">
+                <button id="lang-toggle" class="lang-btn">SW</button>
+            </div>
+            <div class="landing-content">
+                <div class="logo-container">
+                    <div class="logo-heart">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                </div>
+                <h1 class="brand-name">Sms Tamu</h1>
+                <p class="brand-desc" data-i18n="landingDesc">Share sweet, romantic, and engaging text messages with the world.</p>
+                <button id="get-started-btn" class="pulse-btn" data-i18n="getStarted">Get Started</button>
+            </div>
+        </div>
+
+        <!-- Auth Page -->
+        <div id="auth-page" class="page">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <div class="logo-heart small">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h2 id="auth-title" data-i18n="login">Login</h2>
+                    </div>
+                    <form id="auth-form">
+                        <div class="input-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="auth-email" placeholder="Email" required>
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="auth-password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" id="auth-submit" class="btn-primary" data-i18n="login">Login</button>
+                    </form>
+                    <p class="auth-toggle">
+                        <span id="auth-toggle-text" data-i18n="noAccount">Don't have an account?</span>
+                        <a href="#" id="auth-toggle-link" data-i18n="signUp">Sign Up</a>
+                    </p>
+                    <button id="auth-back" class="btn-text" data-i18n="back">Back</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main App -->
+        <div id="main-app" class="page">
+            <!-- Announcement Banner -->
+            <div id="announcement-banner" class="announcement-banner hidden">
+                <span id="announcement-text"></span>
+                <button id="announcement-close"><i class="fas fa-times"></i></button>
+            </div>
+
+            <!-- Header -->
+            <div class="app-header">
+                <div class="header-brand">
+                    <i class="fas fa-heart"></i>
+                    <span>Sms Tamu</span>
+                </div>
+                <div class="header-actions">
+                    <button id="header-admin" class="header-icon hidden"><i class="fas fa-shield-alt"></i></button>
+                    <button id="header-settings" class="header-icon"><i class="fas fa-cog"></i></button>
+                </div>
+            </div>
+
+            <!-- Pages Container -->
+            <div class="pages-container">
+                <!-- Home Feed -->
+                <div id="page-home" class="app-page active">
+                    <div class="feed-header">
+                        <h2 data-i18n="home">Home</h2>
+                        <div class="category-filter">
+                            <button class="cat-btn active" data-cat="all" data-i18n="all">All</button>
+                            <button class="cat-btn" data-cat="Kuomba Msamaha" data-i18n="catApology">Apology</button>
+                            <button class="cat-btn" data-cat="Kusifia" data-i18n="catPraise">Praise</button>
+                            <button class="cat-btn" data-cat="Kuvutia" data-i18n="catFlirt">Flirt</button>
+                            <button class="cat-btn" data-cat="Mengineyo" data-i18n="catOther">Other</button>
+                        </div>
+                    </div>
+                    <div id="posts-feed" class="posts-feed">
+                        <div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>
+                    </div>
+                </div>
+
+                <!-- Search -->
+                <div id="page-search" class="app-page">
+                    <div class="search-header">
+                        <h2 data-i18n="search">Search</h2>
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="search-input" placeholder="Search messages..." data-i18n-placeholder="searchPlaceholder">
+                        </div>
+                    </div>
+                    <div id="search-results" class="posts-feed"></div>
+                </div>
+
+                <!-- Add Post -->
+                <div id="page-add" class="app-page">
+                    <div class="add-post-header">
+                        <h2 data-i18n="newPost">New Post</h2>
+                    </div>
+                    <form id="add-post-form" class="add-post-form">
+                        <div class="form-group">
+                            <label data-i18n="category">Category</label>
+                            <select id="post-category" required>
+                                <option value="Kuomba Msamaha" data-i18n="catApology">Apology</option>
+                                <option value="Kusifia" data-i18n="catPraise">Praise</option>
+                                <option value="Kuvutia" data-i18n="catFlirt">Flirt</option>
+                                <option value="Mengineyo" data-i18n="catOther">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label data-i18n="message">Message</label>
+                            <textarea id="post-content" rows="6" placeholder="Write your sweet message..." required></textarea>
+                        </div>
+                        <div class="form-group vip-toggle">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="post-vip">
+                                <span class="checkmark"></span>
+                                <span data-i18n="vipPost">VIP Message (Premium)</span>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn-primary" data-i18n="post">Post</button>
+                    </form>
+                </div>
+
+                <!-- Chat -->
+                <div id="page-chat" class="app-page">
+                    <div class="chat-header">
+                        <h2 data-i18n="globalChat">Global Chat</h2>
+                        <span id="chat-online-count" class="online-count"><i class="fas fa-circle"></i> <span data-i18n="online">Online</span></span>
+                    </div>
+                    <div id="chat-messages" class="chat-messages"></div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="Type a message..." data-i18n-placeholder="typeMessage">
+                        <button id="chat-send"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+
+                <!-- Profile -->
+                <div id="page-profile" class="app-page">
+                    <div class="profile-header">
+                        <div class="profile-avatar-container">
+                            <img id="profile-avatar" src="https://ui-avatars.com/api/?name=User&background=ff4d79&color=fff" alt="Avatar">
+                            <button id="avatar-edit" class="avatar-edit-btn"><i class="fas fa-camera"></i></button>
+                            <input type="file" id="avatar-input" accept="image/*" hidden>
+                        </div>
+                        <div class="profile-info">
+                            <h3 id="profile-username">User</h3>
+                            <p id="profile-bio" class="profile-bio">No bio yet</p>
+                            <div class="profile-stats">
+                                <div class="stat">
+                                    <span id="profile-following" class="stat-num">0</span>
+                                    <span class="stat-label" data-i18n="following">Following</span>
+                                </div>
+                                <div class="stat">
+                                    <span id="profile-followers" class="stat-num">0</span>
+                                    <span class="stat-label" data-i18n="followers">Followers</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-actions">
+                            <button id="profile-edit-btn" class="btn-outline"><i class="fas fa-edit"></i> <span data-i18n="editProfile">Edit Profile</span></button>
+                            <button id="profile-settings-btn" class="btn-outline"><i class="fas fa-cog"></i> <span data-i18n="settings">Settings</span></button>
+                        </div>
+                    </div>
+                    <div class="profile-tabs">
+                        <button class="profile-tab active" data-tab="my-posts" data-i18n="myPosts">My Posts</button>
+                        <button class="profile-tab" data-tab="liked" data-i18n="liked">Liked</button>
+                        <button class="profile-tab" data-tab="saved" data-i18n="saved">Saved</button>
+                    </div>
+                    <div id="profile-content" class="profile-content"></div>
+                </div>
+
+                <!-- Admin Dashboard -->
+                <div id="page-admin" class="app-page">
+                    <div class="admin-header">
+                        <h2><i class="fas fa-shield-alt"></i> <span data-i18n="adminPanel">Admin Panel</span></h2>
+                    </div>
+                    <div class="admin-grid">
+                        <div class="admin-card">
+                            <h3 data-i18n="autoApprove">Auto Approve Posts</h3>
+                            <label class="switch">
+                                <input type="checkbox" id="admin-auto-approve" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="admin-card" id="admin-pending-card">
+                            <h3 data-i18n="pendingQueue">Pending Queue</h3>
+                            <div id="admin-pending-list" class="admin-list"></div>
+                        </div>
+                        <div class="admin-card">
+                            <h3 data-i18n="manageUsers">Manage Users</h3>
+                            <div id="admin-users-list" class="admin-list"></div>
+                        </div>
+                        <div class="admin-card">
+                            <h3 data-i18n="announcements">Announcements</h3>
+                            <div class="form-group">
+                                <textarea id="admin-announcement" rows="3" placeholder="Type announcement..."></textarea>
+                            </div>
+                            <button id="admin-announce-btn" class="btn-primary btn-sm" data-i18n="send">Send</button>
+                        </div>
+                        <div class="admin-card">
+                            <h3 data-i18n="vipRequests">VIP Requests</h3>
+                            <div id="admin-vip-list" class="admin-list"></div>
+                        </div>
+                        <div class="admin-card">
+                            <h3 data-i18n="bugReports">Bug Reports</h3>
+                            <div id="admin-bug-list" class="admin-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Navigation -->
+            <nav class="bottom-nav">
+                <button class="nav-item active" data-page="home">
+                    <i class="fas fa-home"></i>
+                    <span data-i18n="home">Home</span>
+                </button>
+                <button class="nav-item" data-page="search">
+                    <i class="fas fa-search"></i>
+                    <span data-i18n="search">Search</span>
+                </button>
+                <button class="nav-item nav-add" data-page="add">
+                    <div class="add-circle">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </button>
+                <button class="nav-item" data-page="chat">
+                    <i class="fas fa-comment-dots"></i>
+                    <span data-i18n="chat">Chat</span>
+                </button>
+                <button class="nav-item" data-page="profile">
+                    <i class="fas fa-user"></i>
+                    <span data-i18n="profile">Profile</span>
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+        <!-- Edit Profile Modal -->
+        <div id="modal-edit-profile" class="modal hidden">
+            <div class="modal-header">
+                <h3 data-i18n="editProfile">Edit Profile</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="edit-profile-form">
+                <div class="form-group">
+                    <label data-i18n="username">Username</label>
+                    <input type="text" id="edit-username" required>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="bio">Bio</label>
+                    <textarea id="edit-bio" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn-primary" data-i18n="save">Save</button>
+            </form>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="modal-settings" class="modal hidden">
+            <div class="modal-header">
+                <h3><i class="fas fa-cog"></i> <span data-i18n="settings">Settings</span></h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="settings-content">
+                <div class="settings-section">
+                    <h4 data-i18n="appearance">Appearance</h4>
+                    <div class="settings-item">
+                        <div class="settings-item-info">
+                            <i class="fas fa-moon"></i>
+                            <span data-i18n="darkMode">Dark Mode</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="theme-toggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h4 data-i18n="language">Language</h4>
+                    <div class="settings-item">
+                        <div class="settings-item-info">
+                            <i class="fas fa-globe"></i>
+                            <span data-i18n="language">Language</span>
+                        </div>
+                        <button id="settings-lang-toggle" class="lang-btn">EN</button>
+                    </div>
+                </div>
+                <div class="settings-section">
+                    <h4 data-i18n="support">Support</h4>
+                    <button id="settings-report-btn" class="settings-action-btn">
+                        <i class="fas fa-bug"></i>
+                        <span data-i18n="reportBug">Report a Bug</span>
+                    </button>
+                </div>
+                <div class="settings-section">
+                    <h4 data-i18n="account">Account</h4>
+                    <button id="settings-logout-btn" class="settings-action-btn danger">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span data-i18n="logOut">Log Out</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIP Paywall Modal -->
+        <div id="modal-vip" class="modal hidden">
+            <div class="modal-header vip-header">
+                <h3><i class="fas fa-crown"></i> <span data-i18n="unlockPremium">Unlock Premium</span></h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="vip-content">
+                <div class="vip-price">Tsh 1,000</div>
+                <p data-i18n="vipDesc">Unlock exclusive premium messages and features.</p>
+                <div class="form-group">
+                    <label data-i18n="network">Network</label>
+                    <select id="vip-network">
+                        <option value="vodacom">Vodacom</option>
+                        <option value="tigo">Tigo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="phoneNumber">Phone Number</label>
+                    <input type="tel" id="vip-phone" placeholder="07XX XXX XXX">
+                </div>
+                <button id="vip-pay-btn" class="btn-primary btn-gold" data-i18n="payNow">Pay Now</button>
+            </div>
+        </div>
+
+        <!-- Bug Report Modal -->
+        <div id="modal-bug" class="modal hidden">
+            <div class="modal-header">
+                <h3 data-i18n="reportBug">Report a Bug</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="bug-report-form">
+                <div class="form-group">
+                    <label data-i18n="description">Description</label>
+                    <textarea id="bug-desc" rows="4" placeholder="Describe the issue..." required></textarea>
+                </div>
+                <button type="submit" class="btn-primary" data-i18n="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Edit Post Modal -->
+        <div id="modal-edit-post" class="modal hidden">
+            <div class="modal-header">
+                <h3 data-i18n="editPost">Edit Post</h3>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <form id="edit-post-form">
+                <div class="form-group">
+                    <label data-i18n="category">Category</label>
+                    <select id="edit-post-category">
+                        <option value="Kuomba Msamaha">Kuomba Msamaha</option>
+                        <option value="Kusifia">Kusifia</option>
+                        <option value="Kuvutia">Kuvutia</option>
+                        <option value="Mengineyo">Mengineyo</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label data-i18n="message">Message</label>
+                    <textarea id="edit-post-content" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary" data-i18n="save">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
