@@ -154,7 +154,7 @@ const i18n = {
 let currentLang = 'en';
 
 /* ===== APP STATE ===== */
-let supabase = null;
+let sbClient = null;
 let currentUser = null;
 let currentProfile = null;
 let isAdmin = false;
@@ -187,12 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initSupabase() {
     try {
-        if (typeof supabaseCreateClient === 'undefined' && window.supabase && window.supabase.createClient) {
-            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        // The CDN exposes window.supabase as the library namespace
+        // We use window.supabase.createClient to create our client instance
+        if (window.supabase && typeof window.supabase.createClient === 'function') {
+            sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         } else if (typeof createClient !== 'undefined') {
-            supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-        } else {
-            supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+            sbClient = createClient(SUPABASE_URL, SUPABASE_KEY);
         }
     } catch (err) {
         console.error('Supabase init error:', err);
@@ -203,8 +203,8 @@ function initSupabase() {
 /* ===== AUTH & SESSION ===== */
 async function checkSession() {
     try {
-        if (!supabase) return;
-        const { data: { session }, error } = await supabase.auth.getSession();
+        if (!sbClient) return;
+        const { data: { session }, error } = await sbClient.auth.getSession();
         if (error) throw error;
         if (session) {
             currentUser = session.user;
@@ -221,8 +221,8 @@ async function checkSession() {
 
 async function loadProfile() {
     try {
-        if (!currentUser || !supabase) return;
-        const { data, error } = await supabase
+        if (!currentUser || !sbClient) return;
+        const { data, error } = await sbClient
             .from('profiles')
             .select('*')
             .eq('id', currentUser.id)
@@ -242,7 +242,7 @@ async function loadProfile() {
                 followers_count: 0,
                 following_count: 0
             };
-            await supabase.from('profiles').insert(newProfile);
+            await sbClient.from('profiles').insert(newProfile);
             currentProfile = newProfile;
         }
         updateProfileUI();
@@ -269,7 +269,7 @@ async function handleAuth(e) {
         }
         const isLogin = $('#auth-title').textContent === getText('login');
         if (isLogin) {
-            const { data, error } = await supabase.auth.signInWithPassword({
+            const { data, error } = await sbClient.auth.signInWithPassword({
                 email: emailVal,
                 password: passwordVal
             });
@@ -279,7 +279,7 @@ async function handleAuth(e) {
             showMainApp();
             showToast('Welcome back!', 'success');
         } else {
-            const { data, error } = await supabase.auth.signUp({
+            const { data, error } = await sbClient.auth.signUp({
                 email: emailVal,
                 password: passwordVal
             });
@@ -303,7 +303,7 @@ async function handleLogout() {
             postsSubscription.unsubscribe();
             postsSubscription = null;
         }
-        await supabase.auth.signOut();
+        await sbClient.auth.signOut();
         currentUser = null;
         currentProfile = null;
         isAdmin = false;
@@ -360,7 +360,7 @@ async function loadPosts() {
         const feed = $('#posts-feed');
         if (!feed) return;
         feed.innerHTML = '<div class="loading-spinner"><i class="fas fa-spinner fa-spin"></i></div>';
-        let query = supabase.from('posts').select(`
+        let query = sbClient.from('posts').select(`
             *,
             profiles:user_id (username, avatar_url, is_verified, role)
         `).order('created_at', { ascending: false });
@@ -489,7 +489,7 @@ async function handleLike(postId) {
             if (icon) icon.className = !isLiked ? 'fas fa-heart' : 'far fa-heart';
             if (count) count.textContent = post.likes_count;
         }
-        await supabase.from('posts').update({ likes_count: post.likes_count }).eq('id', postId);
+        await sbClient.from('posts').update({ likes_count: post.likes_count }).eq('id', postId);
     } catch (err) {
         console.error('Like error:', err);
     }
@@ -550,7 +550,7 @@ async function handleSave(postId) {
 async function handleDeletePost(postId) {
     try {
         if (!confirm(getText('confirmDelete'))) return;
-        const { error } = await supabase.from('posts').delete().eq('id', postId);
+        const { error } = await sbClient.from('posts').delete().eq('id', postId);
         if (error) throw error;
         postsCache = postsCache.filter(p => p.id !== postId);
         const card = $(`.post-card[data-post-id="${postId}"]`);
@@ -594,7 +594,7 @@ async function handleCreatePost(e) {
             is_vip: vipCheck ? vipCheck.checked : false,
             created_at: new Date().toISOString()
         };
-        const { error } = await supabase.from('posts').insert(postData);
+        const { error } = await sbClient.from('posts').insert(postData);
         if (error) throw error;
         content.value = '';
         if (vipCheck) vipCheck.checked = false;
@@ -614,7 +614,7 @@ async function handleUpdatePost(e) {
         const category = $('#edit-post-category');
         const content = $('#edit-post-content');
         if (!category || !content) return;
-        const { error } = await supabase.from('posts').update({
+        const { error } = await sbClient.from('posts').update({
             category: category.value,
             content: content.value.trim()
         }).eq('id', editingPostId);
@@ -655,7 +655,7 @@ async function loadChatMessages() {
     try {
         const container = $('#chat-messages');
         if (!container) return;
-        const { data, error } = await supabase
+        const { data, error } = await sbClient
             .from('global_chat')
             .select('*, profiles:user_id (username, avatar_url)')
             .order('created_at', { ascending: true })
@@ -697,7 +697,7 @@ async function handleSendChat() {
         if (!input || !input.value.trim() || !currentUser) return;
         const message = input.value.trim();
         input.value = '';
-        const { error } = await supabase.from('global_chat').insert({
+        const { error } = await sbClient.from('global_chat').insert({
             user_id: currentUser.id,
             message: message,
             created_at: new Date().toISOString()
@@ -711,8 +711,8 @@ async function handleSendChat() {
 
 function subscribeChat() {
     try {
-        if (!supabase) return;
-        chatSubscription = supabase
+        if (!sbClient) return;
+        chatSubscription = sbClient
             .channel('global_chat')
             .on('postgres_changes', {
                 event: 'INSERT',
@@ -730,8 +730,8 @@ function subscribeChat() {
 
 function subscribePosts() {
     try {
-        if (!supabase) return;
-        postsSubscription = supabase
+        if (!sbClient) return;
+        postsSubscription = sbClient
             .channel('posts')
             .on('postgres_changes', {
                 event: '*',
@@ -800,14 +800,14 @@ async function handleAvatarUpload(e) {
         }
         const fileExt = file.name.split('.').pop();
         const fileName = `${currentUser.id}-${Date.now()}.${fileExt}`;
-        const { error: uploadError } = await supabase.storage
+        const { error: uploadError } = await sbClient.storage
             .from('avatars')
             .upload(fileName, file);
         if (uploadError) throw uploadError;
-        const { data: { publicUrl } } = supabase.storage
+        const { data: { publicUrl } } = sbClient.storage
             .from('avatars')
             .getPublicUrl(fileName);
-        await supabase.from('profiles').update({ avatar_url: publicUrl }).eq('id', currentUser.id);
+        await sbClient.from('profiles').update({ avatar_url: publicUrl }).eq('id', currentUser.id);
         currentProfile.avatar_url = publicUrl;
         updateProfileUI();
         showToast('Avatar updated!', 'success');
@@ -827,7 +827,7 @@ async function handleEditProfile(e) {
             username: username.value.trim(),
             bio: bio ? bio.value.trim() : ''
         };
-        const { error } = await supabase.from('profiles').update(updates).eq('id', currentUser.id);
+        const { error } = await sbClient.from('profiles').update(updates).eq('id', currentUser.id);
         if (error) throw error;
         currentProfile = { ...currentProfile, ...updates };
         updateProfileUI();
@@ -856,7 +856,7 @@ async function loadPendingPosts() {
     try {
         const list = $('#admin-pending-list');
         if (!list) return;
-        const { data, error } = await supabase
+        const { data, error } = await sbClient
             .from('posts')
             .select('*, profiles:user_id (username)')
             .eq('status', 'pending')
@@ -885,7 +885,7 @@ async function loadAdminUsers() {
     try {
         const list = $('#admin-users-list');
         if (!list) return;
-        const { data, error } = await supabase
+        const { data, error } = await sbClient
             .from('profiles')
             .select('*')
             .order('created_at', { ascending: false })
@@ -926,7 +926,7 @@ async function loadAdminBugs() {
     try {
         const list = $('#admin-bug-list');
         if (!list) return;
-        const { data, error } = await supabase
+        const { data, error } = await sbClient
             .from('bug_reports')
             .select('*')
             .order('created_at', { ascending: false })
@@ -953,7 +953,7 @@ async function loadAdminBugs() {
 /* Admin Actions */
 window.adminApprovePost = async function(postId) {
     try {
-        await supabase.from('posts').update({ status: 'approved' }).eq('id', postId);
+        await sbClient.from('posts').update({ status: 'approved' }).eq('id', postId);
         showToast('Post approved', 'success');
         loadPendingPosts();
         loadPosts();
@@ -965,7 +965,7 @@ window.adminApprovePost = async function(postId) {
 
 window.adminRejectPost = async function(postId) {
     try {
-        await supabase.from('posts').delete().eq('id', postId);
+        await sbClient.from('posts').delete().eq('id', postId);
         showToast('Post rejected', 'success');
         loadPendingPosts();
     } catch (err) {
@@ -976,7 +976,7 @@ window.adminRejectPost = async function(postId) {
 
 window.adminVerifyUser = async function(userId, verify) {
     try {
-        await supabase.from('profiles').update({ is_verified: verify }).eq('id', userId);
+        await sbClient.from('profiles').update({ is_verified: verify }).eq('id', userId);
         showToast(verify ? 'User verified' : 'User unverified', 'success');
         loadAdminUsers();
     } catch (err) {
@@ -991,9 +991,9 @@ window.adminAddFollowers = async function(userId) {
         if (!num) return;
         const count = parseInt(num);
         if (isNaN(count) || count < 0) return;
-        const { data } = await supabase.from('profiles').select('followers_count').eq('id', userId).single();
+        const { data } = await sbClient.from('profiles').select('followers_count').eq('id', userId).single();
         const newCount = (data?.followers_count || 0) + count;
-        await supabase.from('profiles').update({ followers_count: newCount }).eq('id', userId);
+        await sbClient.from('profiles').update({ followers_count: newCount }).eq('id', userId);
         showToast(`Added ${count} followers`, 'success');
         loadAdminUsers();
     } catch (err) {
@@ -1005,7 +1005,7 @@ window.adminAddFollowers = async function(userId) {
 window.adminBlockUser = async function(userId) {
     try {
         if (!confirm('Are you sure you want to block this user?')) return;
-        await supabase.from('profiles').update({ role: 'blocked' }).eq('id', userId);
+        await sbClient.from('profiles').update({ role: 'blocked' }).eq('id', userId);
         showToast('User blocked', 'success');
         loadAdminUsers();
     } catch (err) {
@@ -1016,7 +1016,7 @@ window.adminBlockUser = async function(userId) {
 
 window.adminDeleteBug = async function(bugId) {
     try {
-        await supabase.from('bug_reports').delete().eq('id', bugId);
+        await sbClient.from('bug_reports').delete().eq('id', bugId);
         showToast('Bug report deleted', 'success');
         loadAdminBugs();
     } catch (err) {
@@ -1031,7 +1031,7 @@ async function loadAnnouncements() {
         const banner = $('#announcement-banner');
         const text = $('#announcement-text');
         if (!banner || !text) return;
-        const { data, error } = await supabase
+        const { data, error } = await sbClient
             .from('announcements')
             .select('*')
             .order('created_at', { ascending: false })
@@ -1051,7 +1051,7 @@ async function handleAnnouncement() {
     try {
         const input = $('#admin-announcement');
         if (!input || !input.value.trim()) return;
-        const { error } = await supabase.from('announcements').insert({
+        const { error } = await sbClient.from('announcements').insert({
             content: input.value.trim(),
             created_at: new Date().toISOString()
         });
@@ -1071,7 +1071,7 @@ async function handleBugReport(e) {
     try {
         const desc = $('#bug-desc');
         if (!desc || !desc.value.trim()) return;
-        const { error } = await supabase.from('bug_reports').insert({
+        const { error } = await sbClient.from('bug_reports').insert({
             user_id: currentUser ? currentUser.id : null,
             user_email: currentUser ? currentUser.email : 'anonymous',
             description: desc.value.trim(),
@@ -1330,8 +1330,8 @@ function bindEvents() {
         });
 
         // Auth state listener
-        if (supabase) {
-            supabase.auth.onAuthStateChange((event, session) => {
+        if (sbClient) {
+            sbClient.auth.onAuthStateChange((event, session) => {
                 if (event === 'SIGNED_OUT') {
                     currentUser = null;
                     currentProfile = null;
